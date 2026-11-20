@@ -1,0 +1,38 @@
+---
+const datos = [
+  { cifra: '3', concepto: 'Proyectos producidos', detalle: 'Exploraciones personales' },
+  { cifra: '+200 h', concepto: 'Estudiando ciencia de datos', detalle: 'Aprender como punto de partida' },
+  { cifra: '+4000 h', concepto: 'Jugando videojuegos', detalle: 'Un interés que también me define' },
+  { cifra: '3 finales', concepto: 'Olimpíadas de matemática', detalle: 'Participante · 2019, 2020 y 2024' },
+];
+---
+
+<section id="acerca" class="scroll-mt-4">
+  <div class="container-page flex flex-col gap-12 py-16 lg:flex-row lg:gap-[100px] lg:py-20">
+    <div class="flex flex-col gap-7 lg:w-[460px] lg:shrink-0">
+      <p class="note text-mint">01 / acerca_de_mí</p>
+      <h2 class="font-display text-[clamp(36px,3.5vw,50px)] leading-[1.08] font-bold tracking-[-0.03em]">
+        La curiosidad es mi punto de partida.
+      </h2>
+      <p class="body-copy text-[17px]">
+        Me interesan los datos, la matemática, la programación y los videojuegos. Distintas maneras de
+        mirar un problema y encontrar nuevas posibilidades.
+      </p>
+      <p class="note text-slate">// entender antes de construir</p>
+    </div>
+
+    <dl class="grid min-w-0 flex-1 gap-x-8 gap-y-4 sm:grid-cols-2">
+      {
+        datos.map((d) => (
+          <div class="flex flex-col gap-2.5 border-t border-edge pt-5 pb-[18px]">
+            <dt class="order-2 text-base">{d.concepto}</dt>
+            <dd class="order-1 font-display text-[44px] tracking-[-0.045em] whitespace-nowrap text-mint">
+              {d.cifra}
+            </dd>
+            <dd class="order-3 font-mono text-[11px] leading-[1.5] text-slate">{d.detalle}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

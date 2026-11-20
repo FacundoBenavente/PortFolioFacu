@@ -1,0 +1,50 @@
+---
+/**
+ * Proyecto personal 01 — Detalle (Figma frame 124:6702).
+ * Pendiente: la sección "Lectura del proyecto" (node 124:6796) no se pudo leer
+ * de Figma (límite de uso del plan) y todavía no está implementada.
+ */
+import Layout from '../../layouts/Layout.astro';
+import DetalleNav from '../../components/proyecto/DetalleNav.astro';
+import Cabecera from '../../components/proyecto/Cabecera.astro';
+import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
+import Visual01 from '../../components/visuals/Visual01.astro';
+import Footer from '../../components/Footer.astro';
+import { site } from '../../data/site';
+import { proyectos } from '../../data/proyectos';
+
+const proyecto = proyectos.find((p) => p.numero === '01')!;
+---
+
+<Layout title={`${proyecto.titulo} — ${site.nombre}`}>
+  <DetalleNav />
+  <main>
+    <Cabecera
+      numero="01"
+      subtitulo="Un espacio para contar cómo una idea toma forma."
+      estado="Ficha por completar"
+      notaTitulo="antes de empezar"
+      nota="El proyecto está producido. Su nombre, contexto y decisiones se incorporarán a esta ficha con información real."
+      datos={[
+        { etiqueta: 'ROL EN EL PROYECTO', valor: 'Por completar', detalle: 'Indicar responsabilidades reales.' },
+        { etiqueta: 'HERRAMIENTAS', valor: 'Por completar', detalle: 'Agregar las herramientas utilizadas.' },
+        { etiqueta: 'CONTEXTO Y FECHA', valor: 'Por completar', detalle: 'Precisar alcance y período.' },
+      ]}
+    />
+
+    <!-- Presentación visual -->
+    <section class="container-page flex flex-col gap-4 pb-12">
+      <Visual01 variant="hero" coordenada={proyecto.coordenada}>
+        <span class="absolute top-6 right-6 rounded-full bg-night/80 px-3 py-[7px] font-mono text-[11px] text-snow">
+          RECURSO VISUAL CONCEPTUAL
+        </span>
+      </Visual01>
+      <p class="font-mono text-[11px] leading-[1.5] text-slate">
+        ↳ Exploración visual abstracta. No representa una captura, entregable ni resultado del proyecto.
+      </p>
+    </section>
+
+    <OtrosProyectos actual="01" />
+  </main>
+  <Footer label="← Volver al índice de proyectos" href="/portfolio#proyectos" />
+</Layout>

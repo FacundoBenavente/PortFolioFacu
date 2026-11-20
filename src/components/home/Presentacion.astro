@@ -1,0 +1,68 @@
+---
+import Nav from '../Nav.astro';
+import GlitchName from '../visuals/GlitchName.astro';
+import Emblema from '../visuals/Emblema.astro';
+import { site } from '../../data/site';
+
+const navLinks = [
+  { label: '02. Proyectos', href: '#proyectos' },
+  { label: '01. Acerca de mí', href: '#acerca' },
+  { label: '04. Formación', href: '#formacion' },
+];
+
+const intereses = ['Datos', 'Matemática', 'Programación', 'Tecnología', 'Videojuegos'];
+---
+
+<header>
+  <Nav links={navLinks} contactHref="#contacto" />
+
+  <!-- Apertura editorial -->
+  <div
+    class="container-page flex flex-col gap-12 pt-16 pb-16 lg:flex-row lg:items-center lg:gap-[30px] lg:pt-[88px] lg:pb-20"
+  >
+    <div class="flex min-w-0 flex-col gap-[26px] lg:w-[798px] lg:shrink-0">
+      <p class="note text-mint">// hola, soy · {site.slug}.portfolio</p>
+      <div class="flex flex-col gap-1.5">
+        <div class="lg:h-[127.68px]">
+          <GlitchName name={site.nombre} class="text-[clamp(56px,7.8vw,112px)]" />
+        </div>
+        <p class="font-display text-[clamp(36px,4vw,58px)] leading-[1.08] font-medium tracking-[-0.043em]">
+          Entre lógica<br />e imaginación.
+        </p>
+      </div>
+      <p class="body-copy text-lg md:text-xl">
+        Diseño UX/UI, diseño 3D y Front-End. Un punto de encuentro entre datos, tecnología y ganas de
+        crear.
+      </p>
+      <div class="flex flex-wrap gap-4 pt-2">
+        <a
+          href="#proyectos"
+          class="flex h-[50px] items-center gap-7 rounded-md border border-mint bg-mint px-[22px] text-mint-ink transition-colors hover:bg-transparent hover:text-mint"
+        >
+          <span class="font-mono text-[13px] font-medium">Explorar proyectos</span>
+          <span class="text-lg" aria-hidden="true">↗</span>
+        </a>
+        <a
+          href="#acerca"
+          class="flex h-[50px] items-center gap-7 rounded-md border border-edge px-[22px] transition-colors hover:border-mint"
+        >
+          <span class="font-mono text-[13px] font-medium">Acerca de mí</span>
+          <span class="text-lg text-mint" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </div>
+
+    <Emblema class="mx-auto w-full max-w-[468px] lg:shrink-0" />
+  </div>
+
+  <!-- Universo personal -->
+  <div class="border-y border-edge">
+    <div
+      class="container-page flex flex-wrap items-center gap-x-8 gap-y-3 py-[26px] font-mono whitespace-nowrap lg:justify-between"
+    >
+      <p class="note w-full text-slate lg:w-auto">INTERESES EN COMÚN</p>
+      {intereses.map((i) => <p class="text-[13px] text-mist">{i}</p>)}
+      <a href="#acerca" class="hidden text-base text-mint lg:block" aria-label="Ir a Acerca de mí">↓</a>
+    </div>
+  </div>
+</header>

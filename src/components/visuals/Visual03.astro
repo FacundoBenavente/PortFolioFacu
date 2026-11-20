@@ -1,0 +1,80 @@
+---
+/**
+ * Ilustración conceptual del Proyecto 03 (tarjeta 416 × 320, node 124:6598):
+ * núcleo de código con conexiones sobre líneas de escaneo. Medidas en px del
+ * diseño aplicadas en "em".
+ */
+interface Props {
+  coordenada: string;
+  class?: string;
+}
+
+const { coordenada, class: className } = Astro.props;
+
+const nodos = [
+  { l: 353.6, t: 217.6 },
+  { l: 341.12, t: 80 },
+  { l: 49.92, t: 192 },
+];
+const conexiones = [
+  { l: 303.68, t: 217.6, w: 49.92, h: 1 },
+  { l: 341.12, t: 80, w: 16.64, h: 1 },
+  { l: 357.76, t: 80, w: 1, h: 48 },
+  { l: 303.68, t: 128, w: 54.08, h: 1 },
+  { l: 49.92, t: 192, w: 62.4, h: 1 },
+];
+const em = (n: number) => `${n}em`;
+---
+
+<div
+  class:list={['canvas relative overflow-hidden rounded-xl bg-[#171f35]', className]}
+  style={{ '--canvas': 416, aspectRatio: '416 / 320' }}
+  role="img"
+  aria-label="Ilustración conceptual: un bloque de código conectado a nodos"
+>
+  <div class="canvas-inner absolute inset-0">
+    <p class="absolute top-[281.6em] left-[16.64em] font-mono whitespace-nowrap text-mist">
+      <span class="text-[8em]">{coordenada}</span>
+    </p>
+
+    {
+      nodos.map((n) => (
+        <span
+          class="absolute box-border border-[3px] border-[#101a2c] bg-mint"
+          style={{ left: em(n.l), top: em(n.t), width: em(8), height: em(8) }}
+        />
+      ))
+    }
+
+    <!-- Núcleo de código -->
+    <div
+      class="absolute top-[64em] left-[112.32em] h-[192em] w-[191.36em] overflow-hidden rounded-[0.5em] border border-[#4e6180] bg-[#11182a] font-mono whitespace-nowrap shadow-float"
+    >
+      <p class="absolute top-[16.6em] left-[15.64em]">
+        <span class="block text-[38.133em] tracking-[-0.045em] text-[#81d7f7]">{'{ }'}</span>
+      </p>
+      <p class="absolute top-[104.6em] left-[15.64em]">
+        <span class="block text-[11em] leading-[1.7] text-[#baa3f6]">idea → lógica<br />lógica → posibilidad</span>
+      </p>
+    </div>
+
+    {
+      conexiones.map((c) => (
+        <span
+          class="absolute bg-[#6d8aac]"
+          style={{ left: em(c.l), top: em(c.t), width: c.w === 1 ? '1px' : em(c.w), height: c.h === 1 ? '1px' : em(c.h) }}
+        />
+      ))
+    }
+
+    <!-- Líneas de escaneo cada 18.82px -->
+    <div
+      class="absolute inset-0"
+      style={{
+        backgroundImage: 'linear-gradient(to bottom, #25304b 1px, transparent 1px)',
+        backgroundSize: '100% 18.8235em',
+      }}
+    >
+    </div>
+  </div>
+</div>

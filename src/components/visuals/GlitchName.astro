@@ -1,0 +1,33 @@
+---
+/**
+ * Nombre con efecto glitch de la portada (node 124:6453).
+ * Todas las medidas están en "em" relativas al tamaño de fuente (112px en Figma),
+ * así el efecto escala junto con el texto.
+ */
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<h1
+  class:list={[
+    'relative inline-block font-display leading-none font-bold tracking-[-0.0446em] whitespace-nowrap text-snow',
+    className,
+  ]}
+>
+  {name}
+  <!-- Fragmento de señal: franja de 4px que muestra una copia rosa desplazada -->
+  <span class="absolute top-[0.45em] left-[0.027em] h-[4px] w-full overflow-hidden" aria-hidden="true">
+    <span class="absolute top-[-0.45em] left-0 text-glitch">{name}</span>
+  </span>
+  <span class="absolute top-[0.53em] left-[0.08em] h-[2px] w-[0.464em] bg-mint" aria-hidden="true"></span>
+  <span class="absolute top-[0.75em] left-[2.84em] h-[3px] w-[0.41em] bg-night" aria-hidden="true"></span>
+  <!-- Cursor: 100px después del final del nombre -->
+  <span
+    class="absolute top-[0.79em] left-[calc(100%+0.89em)] h-[0.08em] w-[0.32em] bg-mint motion-safe:animate-blink"
+    aria-hidden="true"
+  ></span>
+</h1>

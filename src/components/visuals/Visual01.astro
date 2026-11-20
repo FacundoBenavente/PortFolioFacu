@@ -1,0 +1,140 @@
+---
+/**
+ * Ilustración conceptual del Proyecto 01 (interfaz con retícula y órbita).
+ * Dos variantes medidas en Figma: "card" (tarjeta 416 × 320, node 124:6524)
+ * y "hero" (detalle 1296 × 600, node 124:6743). Todas las medidas están en px
+ * del diseño y se aplican en "em" (ver utilidad canvas en global.css).
+ */
+interface Props {
+  variant: 'card' | 'hero';
+  coordenada: string;
+  class?: string;
+}
+
+const { variant, coordenada, class: className } = Astro.props;
+
+const v = {
+  card: {
+    W: 416, H: 320,
+    text: { l: 16.64, t: 281.6, fs: 8 },
+    panel: { l: 66.56, t: 48, w: 282.88, h: 224, p: 12, gap: 10 },
+    ind: { w: 22, h: 4, src: '/images/tarjeta-01-indicadores.svg' },
+    barFs: 7,
+    panelsGap: 8,
+    index: { w: 41.6, gap: 6, bh: 3, widths: [26.624, 33.28, 21.632, 28.288] },
+    main: { p: 10, fs: 34.667, line: 4 },
+    sec: { w: 62.4, p: 8, fig: 37.44, line: 3, src: '/images/tarjeta-01-figura.svg' },
+    seq: { gap: 5, h: 22.187 },
+    orbit: { l: 208, t: 9.6, s: 249.6, src: '/images/tarjeta-01-orbita.svg' },
+    grid: { w: 32, h: 53.333 },
+  },
+  hero: {
+    W: 1296, H: 600,
+    text: { l: 51.84, t: 528, fs: 12.96 },
+    panel: { l: 207.36, t: 90, w: 881.28, h: 420, p: 32.4, gap: 21.6 },
+    ind: { w: 32.68, h: 7.56, src: '/images/detalle-01-indicadores.svg' },
+    barFs: 11.88,
+    panelsGap: 19.44,
+    index: { w: 129.6, gap: 17.28, bh: 7.56, widths: [82.944, 103.68, 67.392, 88.128] },
+    main: { p: 25.92, fs: 108, line: 6.48 },
+    sec: { w: 194.4, p: 21.6, fig: 116.64, line: 5.4, src: '/images/detalle-01-figura.svg' },
+    seq: { gap: 15.12, h: 69.12 },
+    orbit: { l: 648, t: 18, s: 777.6, src: '/images/detalle-01-orbita.svg' },
+    grid: { w: 99.69, h: 100 },
+  },
+}[variant];
+
+const em = (n: number) => `${n}em`;
+const g = v.panelsGap;
+---
+
+<div
+  class:list={['canvas relative overflow-hidden rounded-xl bg-[#17312f]', className]}
+  style={{ '--canvas': v.W, aspectRatio: `${v.W} / ${v.H}` }}
+  role="img"
+  aria-label="Ilustración conceptual: una interfaz abstracta sobre una retícula, con el símbolo de código"
+>
+  <div class="canvas-inner absolute inset-0">
+    <!-- La posición va en el contenedor y el tamaño en el texto: un "em" en un
+         elemento con su propia fuente se mediría sobre esa fuente -->
+    <p class="absolute font-mono whitespace-nowrap text-[#91b7a7]" style={{ left: em(v.text.l), top: em(v.text.t) }}>
+      <span style={{ fontSize: em(v.text.fs) }}>{coordenada}</span>
+    </p>
+
+    <!-- Exploración de interfaz -->
+    <div
+      class="absolute flex flex-col overflow-hidden rounded-[0.6em] border border-[#48645d] bg-[#0d171a] shadow-float"
+      style={{
+        left: em(v.panel.l),
+        top: em(v.panel.t),
+        width: em(v.panel.w),
+        height: em(v.panel.h),
+        padding: em(v.panel.p),
+        gap: em(v.panel.gap),
+      }}
+    >
+      <div class="flex items-center justify-between">
+        <img src={v.ind.src} alt="" style={{ width: em(v.ind.w), height: em(v.ind.h) }} />
+        <p class="font-mono whitespace-nowrap text-mint" style={{ fontSize: em(v.barFs) }}>
+          idea → estructura
+        </p>
+      </div>
+      <div class="flex min-h-0 flex-1" style={{ gap: em(g) }}>
+        <div class="flex h-full shrink-0 flex-col" style={{ width: em(v.index.w), gap: em(v.index.gap), paddingTop: em(5) }}>
+          {
+            v.index.widths.map((w, i) => (
+              <span
+                class:list={['block rounded-[2px]', i === 0 ? 'bg-mint' : 'bg-[#304440]']}
+                style={{ width: em(w), height: em(v.index.bh) }}
+              />
+            ))
+          }
+        </div>
+        <div class="flex h-full min-w-0 flex-1 flex-col" style={{ gap: em(g) }}>
+          <div class="flex min-h-0 flex-1" style={{ gap: em(g) }}>
+            <div
+              class="flex h-full min-w-0 flex-1 flex-col justify-between rounded-[0.4em] bg-[#1f3b34]"
+              style={{ padding: em(v.main.p) }}
+            >
+              <p class="font-display leading-none whitespace-nowrap text-mint" style={{ fontSize: em(v.main.fs) }}>
+                &lt;/&gt;
+              </p>
+              <span class="block w-full rounded-[2px] bg-[#6b9987]" style={{ height: em(v.main.line) }} />
+            </div>
+            <div
+              class="flex h-full shrink-0 flex-col rounded-[0.4em] bg-[#18252a]"
+              style={{ width: em(v.sec.w), padding: em(v.sec.p), gap: em(12) }}
+            >
+              <img src={v.sec.src} alt="" style={{ width: em(v.sec.fig), height: em(v.sec.fig) }} />
+              <span class="block w-full bg-[#3e5660]" style={{ height: em(v.sec.line) }} />
+            </div>
+          </div>
+          <div class="flex" style={{ gap: em(v.seq.gap) }}>
+            <span class="block flex-1 rounded-[0.25em] bg-[#365d50]" style={{ height: em(v.seq.h) }} />
+            <span class="block flex-1 rounded-[0.25em] bg-[#1c2b2d]" style={{ height: em(v.seq.h) }} />
+            <span class="block flex-1 rounded-[0.25em] bg-[#1c2b2d]" style={{ height: em(v.seq.h) }} />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <img
+      src={v.orbit.src}
+      alt=""
+      class="absolute max-w-none"
+      style={{ left: em(v.orbit.l), top: em(v.orbit.t), width: em(v.orbit.s), height: em(v.orbit.s) }}
+    />
+
+    <!-- Trama de composición -->
+    <div
+      class="absolute inset-0 opacity-30"
+      style={{
+        backgroundImage:
+          'linear-gradient(to right, #55766b 1px, transparent 1px), linear-gradient(to bottom, #55766b 1px, transparent 1px)',
+        backgroundSize: `${em(v.grid.w)} ${em(v.grid.h)}`,
+      }}
+    >
+    </div>
+  </div>
+  <slot />
+</div>

@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="43" height="9" viewBox="0 0 43 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Indicadores de ventana" clip-path="url(#clip0_0_4)">
+<circle id="Indicador" cx="4.5" cy="4.5" r="4.5" fill="#F48D9D"/>
+<circle id="Indicador_2" cx="21.5" cy="4.5" r="4.5" fill="#E7C984"/>
+<circle id="Indicador_3" cx="38.5" cy="4.5" r="4.5" fill="#8CF0CB"/>
+</g>
+<defs>
+<clipPath id="clip0_0_4">
+<rect width="43" height="9" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,52 @@
+---
+/** Navegación entre proyectos al final de cada caso (Figma node 124:6853). */
+import { proyectos } from '../../data/proyectos';
+
+interface Props {
+  actual: string;
+}
+
+const { actual } = Astro.props;
+const otros = proyectos.filter((p) => p.numero !== actual);
+---
+
+<section class="bg-surface">
+  <div class="container-page flex flex-col gap-7 py-16">
+    <div class="note flex flex-wrap justify-between gap-x-6 gap-y-1">
+      <p class="text-mint">&lt;/proyecto_{actual}&gt;</p>
+      <p class="text-mist">Seguí explorando el archivo</p>
+    </div>
+    <ul class="grid gap-6 md:grid-cols-2">
+      {
+        otros.map((p) => {
+          const Tag = p.href ? 'a' : 'div';
+          return (
+            <li>
+              <Tag
+                href={p.href}
+                class:list={[
+                  'group flex items-center gap-6 rounded-xl border border-edge p-6',
+                  p.href && 'transition-colors hover:border-mint',
+                ]}
+              >
+                <span class="flex size-[76px] shrink-0 items-center justify-center rounded-md bg-mint-deep font-mono text-[28px] text-mint">
+                  {p.numero}
+                </span>
+                <span class="flex min-w-0 flex-1 flex-col gap-2.5">
+                  <span class="font-mono text-[10px] text-slate">EXPLORAR PROYECTO</span>
+                  <span class="font-display text-[clamp(20px,1.8vw,26px)] tracking-[-0.031em]">{p.titulo}</span>
+                </span>
+                <span
+                  class="text-[30px] text-mint transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  aria-hidden="true"
+                >
+                  ↗
+                </span>
+              </Tag>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>

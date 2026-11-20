@@ -1,0 +1,55 @@
+---
+const hitos = [
+  {
+    indice: ['APRENDIZAJE'],
+    titulo: '3 cursos terminados',
+    texto:
+      'Tecnologías aplicables a la ciencia de datos. Nombres de cursos, instituciones y tecnologías: por completar.',
+  },
+  {
+    indice: ['SECUNDARIO'],
+    titulo: '9,07 de promedio',
+    texto: 'Promedio de la etapa secundaria. Institución y período: por completar.',
+  },
+  {
+    indice: ['2019 / 2020', '2024'],
+    titulo: '3 finales de olimpíadas de matemática',
+    texto: 'Participación en las finales de 2019, 2020 y 2024.',
+  },
+];
+---
+
+<section id="formacion" class="scroll-mt-4 bg-surface">
+  <div class="container-page flex flex-col gap-12 py-16 lg:flex-row lg:gap-[100px] lg:py-20">
+    <div class="flex flex-col items-start gap-7 lg:w-[460px] lg:shrink-0">
+      <p class="note text-mint">04 / formación</p>
+      <h2 class="font-display text-[clamp(36px,3.5vw,50px)] leading-[1.08] font-bold tracking-[-0.03em]">
+        Aprender es parte del proceso.
+      </h2>
+      <p class="body-copy text-[17px]">
+        Un recorrido atravesado por la matemática y el estudio de tecnologías aplicables a la ciencia de
+        datos.
+      </p>
+      <div class="flex items-center gap-5 rounded-md bg-raised px-[18px] py-3.5 whitespace-nowrap">
+        <span class="font-display text-[30px] text-mint">+200 h</span>
+        <span class="font-mono text-[11px] text-mist">ciencia de datos</span>
+      </div>
+    </div>
+
+    <ul class="flex min-w-0 flex-1 flex-col">
+      {
+        hitos.map((h) => (
+          <li class="flex flex-col gap-3 border-t border-edge py-[26px] sm:flex-row sm:gap-[26px]">
+            <p class="note shrink-0 text-mint sm:w-[120px]">
+              {h.indice.map((l, i) => (i ? [<br />, l] : l))}
+            </p>
+            <div class="flex min-w-0 flex-1 flex-col gap-2.5">
+              <h3 class="font-display text-[26px] font-medium">{h.titulo}</h3>
+              <p class="body-copy text-sm">{h.texto}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

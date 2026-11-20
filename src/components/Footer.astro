@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  /** Texto de la derecha (mint) */
+  label: string;
+  /** Si se indica, el texto de la derecha es un enlace */
+  href?: string;
+}
+
+const { label, href } = Astro.props;
+---
+
+<footer class="border-t border-edge">
+  <div
+    class="container-page note flex flex-col gap-2 py-[30px] sm:flex-row sm:items-center sm:justify-between"
+  >
+    <p class="text-slate">© {site.nombre} · Portfolio personal</p>
+    {
+      href ? (
+        <a href={href} class="text-mint hover:underline">
+          {label}
+        </a>
+      ) : (
+        <p class="text-mint">{label}</p>
+      )
+    }
+  </div>
+</footer>

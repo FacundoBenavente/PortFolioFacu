@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** "neutral": fondo raised y texto mist · "mint": fondo mint-deep y texto mint */
+  tone?: 'neutral' | 'mint';
+}
+
+const { tone = 'neutral' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-block rounded-full px-3 py-[7px] font-mono text-[11px] whitespace-nowrap',
+    tone === 'mint' ? 'bg-mint-deep text-mint' : 'bg-raised text-mist',
+  ]}
+>
+  <slot />
+</span>

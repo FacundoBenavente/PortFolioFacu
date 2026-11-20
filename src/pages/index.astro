@@ -1,0 +1,110 @@
+---
+/**
+ * Entrada — Consola de bienvenida (Figma node 124:6385).
+ * Pantalla de bienvenida tipo terminal; "y" o Enter llevan al portfolio.
+ */
+import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
+import { site } from '../data/site';
+
+const arranque = [
+  { etiqueta: 'Cargando identidad', valor: site.nombre },
+  { etiqueta: 'Montando archivo', valor: '3 proyectos personales' },
+  { etiqueta: 'Inicializando curiosidad', valor: 'datos / matemática / videojuegos' },
+];
+---
+
+<Layout title={`${site.nombre} — Bienvenida`}>
+  <div class="container-page flex min-h-svh flex-col">
+    <!-- Cabecera de acceso -->
+    <header class="flex h-[100px] shrink-0 items-center justify-between gap-6">
+      <Logo href="/" />
+      <p class="note hidden text-slate sm:block">PORTFOLIO PERSONAL / INICIO</p>
+    </header>
+
+    <!-- Área de bienvenida -->
+    <main class="flex flex-1 flex-col items-center justify-center gap-7 py-10">
+      <div class="note flex w-full max-w-[1104px] flex-wrap justify-between gap-x-6 gap-y-1">
+        <p class="text-mist">// cada idea empieza con una línea</p>
+        <p class="text-slate">sesión: visitante</p>
+      </div>
+
+      <!-- Consola -->
+      <div class="w-full max-w-[1104px] overflow-hidden rounded-xl border border-edge bg-surface shadow-float">
+        <div class="flex h-[52px] items-center justify-between gap-4 bg-raised px-6">
+          <img src="/images/consola-indicadores.svg" alt="" width="43" height="9" />
+          <p class="truncate font-mono text-xs text-mist">{site.slug}@portfolio: ~ / bienvenida</p>
+          <p class="hidden font-mono text-[11px] text-slate sm:block">UTF-8</p>
+        </div>
+
+        <div class="flex flex-col gap-[30px] p-6 md:p-12">
+          <p class="font-mono text-sm text-mist"><span class="text-mint">~ $ </span>iniciar portfolio</p>
+
+          <div class="flex flex-col gap-3">
+            <h1 class="font-display text-[clamp(44px,5vw,72px)] font-bold tracking-[-0.042em]">
+              Hola, mundo<span class="text-mint motion-safe:animate-blink">_</span>
+            </h1>
+            <p class="font-mono text-[15px] leading-[1.7] text-mist">
+              Soy {site.nombre}. Este es mi portfolio personal.<br />
+              {site.roles.join(' · ')}
+            </p>
+          </div>
+
+          <ul class="flex flex-col gap-3 font-mono text-[13px]">
+            {
+              arranque.map((r) => (
+                <li class="flex flex-wrap gap-x-[18px] gap-y-1">
+                  <span class="text-mint">[ok]</span>
+                  <span class="text-mist sm:w-[280px]">{r.etiqueta}</span>
+                  <span class="w-full text-snow sm:w-auto">{r.valor}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <div class="h-px w-full bg-edge"></div>
+
+          <div class="flex flex-col gap-[18px]">
+            <p class="font-mono text-lg md:text-xl">
+              ¿Continuar al portfolio? <span class="text-slate">[y/n]</span>
+            </p>
+            <a
+              href="/portfolio"
+              id="entrar"
+              class="group flex w-fit items-center gap-3.5 rounded-md text-mint focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mint"
+            >
+              <span class="font-mono text-[26px]" aria-hidden="true">❯</span>
+              <span class="font-mono text-[26px]">y</span>
+              <span class="h-[27px] w-3 bg-mint motion-safe:animate-blink" aria-hidden="true"></span>
+              <span class="font-mono text-xs text-slate group-hover:text-mint">↵ entrar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="note flex w-full max-w-[1104px] flex-wrap justify-between gap-x-6 gap-y-1">
+        <p class="text-slate">Un espacio para pensar, diseñar y construir.</p>
+        <p class="text-mint">sistema listo ●</p>
+      </div>
+    </main>
+
+    <!-- Pie de acceso -->
+    <footer class="note flex h-[74px] shrink-0 items-center justify-between gap-4 border-t border-edge text-slate">
+      <p>&lt;portfolio estado="por explorar" /&gt;</p>
+      <p>00 / 04</p>
+    </footer>
+  </div>
+</Layout>
+
+<script>
+  // Responder a la consola: "y" o Enter entran al portfolio.
+  const entrar = document.getElementById('entrar') as HTMLAnchorElement | null;
+  document.addEventListener('keydown', (e) => {
+    if (!entrar || e.metaKey || e.ctrlKey || e.altKey) return;
+    const target = e.target as HTMLElement;
+    if (target.closest('input, textarea, [contenteditable]')) return;
+    if (e.key === 'y' || e.key === 'Y' || (e.key === 'Enter' && target === document.body)) {
+      window.location.href = entrar.href;
+    }
+  });
+</script>

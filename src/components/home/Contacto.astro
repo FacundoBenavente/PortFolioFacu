@@ -1,0 +1,36 @@
+---
+import Pill from '../Pill.astro';
+import { site } from '../../data/site';
+---
+
+<section id="contacto" class="scroll-mt-4">
+  <div class="container-page flex flex-col gap-10 pt-16 pb-14 lg:pt-20 lg:pb-16">
+    <p class="note text-mint">05 / siguiente_conversación</p>
+
+    <div class="flex flex-col gap-12 lg:flex-row lg:items-end lg:gap-20">
+      <div class="flex flex-col gap-6 lg:w-[700px] lg:shrink-0">
+        <h2 class="font-display text-[clamp(44px,5vw,72px)] leading-[1.06] font-bold tracking-[-0.042em]">
+          ¿Y si creamos<br />algo nuevo?
+        </h2>
+        <p class="body-copy text-[17px]">Una idea, una pregunta o una conversación sobre tecnología.</p>
+      </div>
+
+      <div class="flex min-w-0 flex-1 flex-col items-start gap-[18px]">
+        {site.emailEsEjemplo && <Pill tone="mint">Contacto de ejemplo</Pill>}
+        <a
+          href={`mailto:${site.email}`}
+          class="group flex w-full items-center justify-between gap-4 border-b border-mint pb-[18px] text-mint"
+        >
+          <span class="min-w-0 truncate font-display text-[clamp(20px,1.9vw,26px)] tracking-[-0.038em]">
+            {site.email}
+          </span>
+          <span
+            class="text-[30px] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+            aria-hidden="true">↗</span
+          >
+        </a>
+        {site.emailEsEjemplo && <p class="note text-slate">Reemplazar por tu correo y perfiles reales.</p>}
+      </div>
+    </div>
+  </div>
+</section>

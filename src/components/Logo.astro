@@ -1,0 +1,14 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  href?: string;
+}
+
+const { href = '/portfolio' } = Astro.props;
+---
+
+<a href={href} class="flex items-center gap-2.5 whitespace-nowrap">
+  <span class="font-mono text-[26px] font-semibold text-mint" aria-hidden="true">&lt;/</span>
+  <span class="font-display text-[22px] font-bold">{site.nombre}<span class="text-mint">.</span></span>
+</a>

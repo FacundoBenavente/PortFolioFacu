@@ -1,0 +1,39 @@
+---
+import Logo from './Logo.astro';
+
+interface Props {
+  links: { label: string; href: string }[];
+  contactHref: string;
+}
+
+const { links, contactHref } = Astro.props;
+---
+
+<nav class="border-b border-edge" aria-label="Navegación principal">
+  <div class="container-page flex h-20 items-center justify-between gap-6 lg:h-24">
+    <Logo />
+    <div class="flex items-center gap-8">
+      <ul class="hidden items-center gap-8 md:flex">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="font-mono text-[13px] whitespace-nowrap text-mist transition-colors hover:text-mint"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        href={contactHref}
+        class="flex items-center gap-6 rounded-md border border-mint px-[18px] py-3 text-mint transition-colors hover:bg-mint hover:text-mint-ink"
+      >
+        <span class="font-mono text-[13px]">Hablemos</span>
+        <span class="text-base" aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</nav>

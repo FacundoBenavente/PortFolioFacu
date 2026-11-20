@@ -1,0 +1,12 @@
+---
+/** Navegación de las páginas de proyecto (Figma node 124:6703). */
+import Nav from '../Nav.astro';
+
+const links = [
+  { label: '← Portfolio', href: '/portfolio' },
+  { label: 'Proyectos', href: '/portfolio#proyectos' },
+  { label: 'Acerca de mí', href: '/portfolio#acerca' },
+];
+---
+
+<Nav links={links} contactHref="/portfolio#contacto" />

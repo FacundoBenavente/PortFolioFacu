@@ -1,0 +1,74 @@
+---
+import Pill from '../Pill.astro';
+import Visual01 from '../visuals/Visual01.astro';
+import Visual02 from '../visuals/Visual02.astro';
+import Visual03 from '../visuals/Visual03.astro';
+import { proyectos } from '../../data/proyectos';
+---
+
+<section id="proyectos" class="scroll-mt-4 bg-surface">
+  <div class="container-page flex flex-col gap-9 pt-16 pb-14 lg:pt-[72px] lg:pb-16">
+    <p class="note text-mint">02 / proyectos_seleccionados</p>
+
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <h2
+        class="min-w-0 flex-1 font-display text-[clamp(36px,3.9vw,56px)] leading-[1.08] font-bold tracking-[-0.027em]"
+      >
+        Tres proyectos.<br />Distintas posibilidades.
+      </h2>
+      <div class="flex flex-col gap-3 lg:w-80 lg:shrink-0">
+        <p class="font-mono text-[13px] text-mint">[ 01 — 03 ]</p>
+        <p class="body-copy text-sm">
+          Archivo personal. Cada proyecto tiene su propio espacio para contar el proceso.
+        </p>
+      </div>
+    </div>
+
+    <ul class="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
+      {
+        proyectos.map((p) => {
+          const Tag = p.href ? 'a' : 'div';
+          return (
+            <li>
+              <Tag
+                href={p.href}
+                class:list={['group flex flex-col gap-[22px]', p.href && 'cursor-pointer']}
+              >
+                {p.numero === '01' && <Visual01 variant="card" coordenada={p.coordenada} />}
+                {p.numero === '02' && <Visual02 coordenada={p.coordenada} />}
+                {p.numero === '03' && <Visual03 coordenada={p.coordenada} />}
+                <div class="flex flex-col items-start gap-4">
+                  <div class="flex w-full items-center justify-between text-mint">
+                    <span class="font-mono text-xs">proyecto_{p.numero}</span>
+                    <span
+                      class="text-[22px] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      aria-hidden="true"
+                    >
+                      ↗
+                    </span>
+                  </div>
+                  <h3
+                    class:list={[
+                      'font-display text-[29px] font-medium tracking-[-0.034em]',
+                      p.href && 'group-hover:text-mint',
+                    ]}
+                  >
+                    {p.titulo}
+                  </h3>
+                  <p class="body-copy text-sm">{p.resumen}</p>
+                  <Pill>{p.herramientas}</Pill>
+                  <p class="font-mono text-[11px] text-slate">{p.estado}</p>
+                </div>
+              </Tag>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <p class="font-mono text-[11px] leading-[1.5] text-slate">
+      ↳ Recursos visuales conceptuales. No son capturas ni resultados de los proyectos. Los detalles se
+      completarán con información real.
+    </p>
+  </div>
+</section>
