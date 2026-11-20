@@ -1,0 +1,36 @@
+---
+/**
+ * Bloque de título del caso: "<proyecto_0X> [Ficha por completar]",
+ * "Proyecto personal 0X" y la bajada. P01 y P02 usan 88px; P03 usa 74px.
+ */
+import Pill from '../Pill.astro';
+
+interface Props {
+  numero: string;
+  subtitulo: string;
+  estado?: string;
+  size?: 'xl' | 'lg';
+  /** Línea gris opcional debajo de la bajada (P03) */
+  anotacion?: string;
+  class?: string;
+}
+
+const { numero, subtitulo, estado = 'Ficha por completar', size = 'xl', anotacion, class: className } = Astro.props;
+---
+
+<div class:list={['flex min-w-0 flex-col', size === 'xl' ? 'gap-6' : 'gap-3', className]}>
+  <div class="flex flex-wrap items-center gap-3">
+    <p class="note text-mint">&lt;proyecto_{numero}&gt;</p>
+    <Pill>{estado}</Pill>
+  </div>
+  <h1
+    class:list={[
+      'font-display leading-[1.02] font-bold tracking-[-0.045em]',
+      size === 'xl' ? 'text-[clamp(52px,6.1vw,88px)]' : 'text-[clamp(48px,5.1vw,74px)]',
+    ]}
+  >
+    Proyecto<br />personal <span class="text-mint">{numero}</span>
+  </h1>
+  <p class:list={['body-copy text-lg md:text-xl', size === 'lg' && 'mt-4']}>{subtitulo}</p>
+  {anotacion && <p class="note mt-[18px] text-slate">{anotacion}</p>}
+</div>

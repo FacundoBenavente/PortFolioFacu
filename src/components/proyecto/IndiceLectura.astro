@@ -1,0 +1,35 @@
+---
+/** Barra "LEER PROYECTO_0X ↓ · 01. Contexto · 02. Proceso · 03. Solución · 04. Aprendizajes". */
+interface Props {
+  numero: string;
+  class?: string;
+}
+
+const { numero, class: className } = Astro.props;
+
+const partes = [
+  { label: '01. Contexto', href: '#contexto' },
+  { label: '02. Proceso', href: '#proceso' },
+  { label: '03. Solución', href: '#solucion' },
+  { label: '04. Aprendizajes', href: '#aprendizajes' },
+];
+---
+
+<nav
+  aria-label="Partes del caso"
+  class:list={[
+    'flex min-h-[62px] flex-wrap items-center gap-x-8 gap-y-3 border-y border-edge py-4 lg:justify-between lg:py-0',
+    className,
+  ]}
+>
+  <a href="#contexto" class="w-full font-mono text-xs text-mint hover:underline lg:w-auto">
+    LEER PROYECTO_{numero} ↓
+  </a>
+  {
+    partes.map((p) => (
+      <a href={p.href} class="font-mono text-[11px] whitespace-nowrap text-mist hover:text-mint">
+        {p.label}
+      </a>
+    ))
+  }
+</nav>

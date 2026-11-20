@@ -1,0 +1,23 @@
+---
+/**
+ * Bloque de lectura: anotación mint, título de 34px, texto y estado.
+ * Se usa en contexto, objetivo, solución y aprendizajes de los tres casos.
+ */
+interface Props {
+  etiqueta: string;
+  titulo: string;
+  texto: string;
+  estado?: string;
+  id?: string;
+  class?: string;
+}
+
+const { etiqueta, titulo, texto, estado = '[ Contenido por completar ]', id, class: className } = Astro.props;
+---
+
+<div id={id} class:list={['flex min-w-0 scroll-mt-4 flex-col gap-4', className]}>
+  <p class="note text-mint">{etiqueta}</p>
+  <h3 class="font-display text-[clamp(28px,2.4vw,34px)] font-bold tracking-[-0.03em]">{titulo}</h3>
+  <p class="body-copy text-[17px]">{texto}</p>
+  {estado && <p class="font-mono text-[11px] text-slate">{estado}</p>}
+</div>

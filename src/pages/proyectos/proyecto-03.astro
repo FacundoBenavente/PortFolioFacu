@@ -1,0 +1,175 @@
+---
+/** Proyecto personal 03 — Detalle (Figma frame 124:7005). */
+import Layout from '../../layouts/Layout.astro';
+import DetalleNav from '../../components/proyecto/DetalleNav.astro';
+import Ruta from '../../components/proyecto/Ruta.astro';
+import Titulo from '../../components/proyecto/Titulo.astro';
+import Datos from '../../components/proyecto/Datos.astro';
+import RecursoBadge from '../../components/proyecto/RecursoBadge.astro';
+import Leyenda from '../../components/proyecto/Leyenda.astro';
+import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
+import Columna from '../../components/proyecto/Columna.astro';
+import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
+import Visual03 from '../../components/visuals/Visual03.astro';
+import Footer from '../../components/Footer.astro';
+import { site } from '../../data/site';
+import { getProyecto } from '../../data/proyectos';
+
+const p = getProyecto('03');
+
+const registros = [
+  {
+    n: '01',
+    titulo: 'Plantear',
+    pregunta: '¿Qué información ayudó a formular el problema?',
+    evidencia: 'Referencias, notas o material de exploración real.',
+  },
+  {
+    n: '02',
+    titulo: 'Construir',
+    pregunta: '¿Qué alternativas se probaron y con qué criterios se eligió?',
+    evidencia: 'Versiones, esquemas o fragmentos del trabajo propio.',
+  },
+  {
+    n: '03',
+    titulo: 'Revisar',
+    pregunta: '¿Qué se ajustó y qué quedó pendiente?',
+    evidencia: 'Cambios y pruebas, solo si se realizaron.',
+  },
+];
+---
+
+<Layout title={`${p.titulo} — ${site.nombre}`}>
+  <DetalleNav />
+  <main>
+    <!-- Apertura del proyecto -->
+    <section class="container-page flex flex-col gap-10 pt-[34px]">
+      <Ruta numero="03" />
+      <div class="grid gap-10 lg:grid-cols-[580fr_660fr] lg:items-center lg:gap-14">
+        <Titulo
+          numero="03"
+          subtitulo={p.subtitulo}
+          size="lg"
+          anotacion="// pensar en conexiones, no en piezas aisladas"
+        />
+        <div class="flex flex-col gap-4">
+          <Visual03 variant="hero" coordenada={p.coordenada}><RecursoBadge /></Visual03>
+          <Leyenda />
+        </div>
+      </div>
+      <Datos datos={p.datos} />
+      <IndiceLectura numero="03" />
+    </section>
+
+    <!-- Planteamiento -->
+    <section
+      id="contexto"
+      class="container-page grid scroll-mt-4 gap-12 pt-16 pb-[72px] lg:grid-cols-[320px_1fr_1fr] lg:gap-x-24"
+    >
+      <div class="flex flex-col gap-4">
+        <p class="note text-mint">01 / planteamiento</p>
+        <h2 class="font-display text-[clamp(34px,3.1vw,44px)] leading-[1.08] font-bold tracking-[-0.034em]">
+          Primero,<br />la pregunta.
+        </h2>
+        <p class="body-copy mt-4 text-sm">
+          El proyecto está producido. Los detalles de este caso están pendientes de documentar.
+        </p>
+      </div>
+      <Columna
+        etiqueta="// contexto"
+        titulo="Entender el escenario."
+        texto="Agregar la motivación, la situación inicial y las condiciones que dieron origen al proyecto."
+      />
+      <Columna
+        etiqueta="// objetivo"
+        titulo="Definir el desafío."
+        texto="Especificar qué se quería conseguir y qué quedó dentro o fuera del alcance."
+      />
+    </section>
+
+    <!-- Registro del proceso -->
+    <section id="proceso" class="scroll-mt-4 bg-surface">
+      <div class="container-page py-16">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div class="flex flex-col gap-3">
+            <p class="note text-mint">02 / proceso</p>
+            <h2 class="font-display text-[clamp(36px,3.4vw,48px)] leading-[1.08] font-bold tracking-[-0.03em]">
+              Detrás de cada resultado,<br />una decisión.
+            </h2>
+          </div>
+          <p class="body-copy text-sm lg:w-[496px]">
+            Guion para documentar decisiones reales. Completar con el proceso que efectivamente se realizó.
+          </p>
+        </div>
+
+        <ol class="mt-8">
+          {
+            registros.map((r) => (
+              <li class="grid gap-x-6 gap-y-5 border-t border-edge pt-7 pb-8 md:grid-cols-[278px_1fr] lg:grid-cols-[278px_1fr_340px]">
+                <div class="flex flex-col gap-2">
+                  <p class="font-mono text-xs text-mint">REGISTRO_{r.n}</p>
+                  <h3 class="font-display text-[28px]">{r.titulo}</h3>
+                </div>
+                <div class="flex flex-col gap-3">
+                  <p class="font-mono text-[10px] text-code-blue">PREGUNTA</p>
+                  <p class="body-copy text-[15px]">{r.pregunta}</p>
+                </div>
+                <div class="flex flex-col gap-3 md:col-start-2 lg:col-start-auto">
+                  <p class="font-mono text-[10px] text-code-violet">EVIDENCIA POR AGREGAR</p>
+                  <p class="body-copy text-sm">{r.evidencia}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <p class="note mt-8 text-slate">// cada registro se completará con información del proyecto</p>
+      </div>
+    </section>
+
+    <!-- Solución del proyecto -->
+    <section id="solucion" class="container-page scroll-mt-4 pt-[72px] pb-[72px]">
+      <p class="note text-mint">03 / solución</p>
+      <div class="mt-6 grid gap-10 lg:grid-cols-[640fr_616fr]">
+        <div class="flex flex-col gap-7">
+          <h2 class="font-display text-[clamp(40px,3.8vw,54px)] leading-[1.08] font-bold tracking-[-0.034em]">
+            Hacer visible<br />lo que se resolvió.
+          </h2>
+          <p class="body-copy text-[17px]">
+            Incorporar la solución final, describir sus partes y relacionarlas con el objetivo. Este espacio
+            espera recursos y explicaciones del proyecto real.
+          </p>
+          <p class="note text-slate">[ Contenido por completar ]</p>
+        </div>
+        <div class="rounded-xl border border-edge bg-panel p-6 md:p-8 lg:mt-3">
+          <div class="flex items-center justify-between border-b border-edge pb-[22px] font-mono text-[15px]">
+            <span class="text-code-blue">pregunta</span>
+            <span class="font-sans text-2xl text-slate" aria-hidden="true">→</span>
+            <span class="text-mint">solución</span>
+          </div>
+          <pre
+            class="overflow-x-auto pt-5 font-mono text-[clamp(14px,1.2vw,17px)] leading-[32px] text-mist">{`{
+  objetivo: [por completar],
+  decisiones: [por documentar],
+  resultado: [agregar recurso real]
+}`}</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Aprendizajes -->
+    <section id="aprendizajes" class="container-page grid scroll-mt-4 gap-10 pb-[72px] lg:grid-cols-[360px_1fr]">
+      <div class="flex flex-col gap-4">
+        <p class="note text-mint">04 / aprendizajes</p>
+        <span class="font-mono text-[60px] leading-none text-mint" aria-hidden="true">/* */</span>
+      </div>
+      <Columna
+        etiqueta="// reflexión_personal"
+        titulo="Una versión más de mí."
+        texto="Agregar qué aprendí al producir este proyecto, qué decisiones volvería a tomar y qué problema me gustaría explorar después."
+      />
+    </section>
+
+    <OtrosProyectos actual="03" />
+  </main>
+  <Footer label="← Volver al índice de proyectos" href="/portfolio#proyectos" />
+</Layout>

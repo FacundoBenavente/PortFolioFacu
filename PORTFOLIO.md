@@ -1,6 +1,6 @@
 # Guía del portfolio — Facundo
 
-Esta es la guía para modificar el portfolio, pensada para una persona o para una IA. Explica qué es el sitio, de dónde sale el diseño, cómo está organizado, qué reglas seguir, cómo hacer los cambios comunes y **qué falta construir**.
+Esta es la guía para modificar el portfolio, pensada para una persona o para una IA. Explica qué es el sitio, de dónde sale el diseño, cómo está organizado, qué reglas seguir y cómo hacer los cambios más comunes.
 
 > **Si sos una IA:** leé esta guía completa antes de editar. Respetá las reglas de la sección 4 y verificá cada cambio con la checklist de la sección 10. Si un pedido contradice esta guía, avisá antes de hacerlo. Si cambiás algo que esta guía describe, actualizá también esta guía.
 
@@ -8,14 +8,14 @@ Esta es la guía para modificar el portfolio, pensada para una persona o para un
 
 ## 1. Resumen rápido
 
-- Sitio **estático de 3 páginas** hecho con **Astro 5 + Tailwind CSS 4**, con estética de consola o terminal en modo oscuro.
-- Replica 5 frames de Figma (sección 2). **Dos de las páginas de proyecto todavía no están construidas** (sección 3).
-- Los datos personales están en `src/data/site.ts` y los proyectos en `src/data/proyectos.ts`. El resto del contenido está escrito dentro de cada componente.
+- Sitio **estático de 5 páginas** hecho con **Astro 5 + Tailwind CSS 4**, con estética de consola o terminal en modo oscuro.
+- Replica 5 frames de Figma (sección 2). Están todos implementados.
+- Los datos personales están en `src/data/site.ts` y los proyectos en `src/data/proyectos.ts`. El resto del contenido está escrito dentro de cada componente o página.
 - La única parte con JavaScript en el navegador es la entrada: con "y" o Enter se pasa al portfolio.
 
 ```bash
 npm install        # instalar dependencias (una vez)
-npm run dev        # servidor local en http://localhost:4321
+npm run dev        # servidor local (4321, o 4322 si el 4321 está ocupado)
 npm run build      # genera el sitio en dist/ — usalo para verificar
 npm run preview    # sirve dist/ localmente
 ```
@@ -25,6 +25,8 @@ npm run preview    # sirve dist/ localmente
 | `/` | Entrada — consola de bienvenida | `src/pages/index.astro` |
 | `/portfolio` | Portfolio principal | `src/pages/portfolio.astro` |
 | `/proyectos/proyecto-01` | Detalle del Proyecto 01 | `src/pages/proyectos/proyecto-01.astro` |
+| `/proyectos/proyecto-02` | Detalle del Proyecto 02 | `src/pages/proyectos/proyecto-02.astro` |
+| `/proyectos/proyecto-03` | Detalle del Proyecto 03 | `src/pages/proyectos/proyecto-03.astro` |
 
 ---
 
@@ -35,14 +37,15 @@ npm run preview    # sirve dist/ localmente
 | Archivo | `Landing Page - TCGCheck` (file key `wUNcTIjnvfx73XhnEAujgI`) |
 | Página | `TP 5 - MoodBoard` (node `70:2`) |
 | Link base | https://www.figma.com/design/wUNcTIjnvfx73XhnEAujgI/Landing-Page---TCGCheck |
+| Exportaciones locales | `Diseños/` (SVG + PDF de los tres frames de detalle) |
 
-| Frame | Node | Tamaño | Estado |
+| Frame | Node | Tamaño | Fuente usada |
 |---|---|---|---|
-| Entrada — Consola de bienvenida | `124:6385` | 1440 × 1000 | ✅ implementado |
-| Portfolio principal — Facundo | `124:6436` | 1440 × 3715 | ✅ implementado |
-| Proyecto personal 01 — Detalle | `124:6702` | 1440 × 2937 | ⚠️ falta 1 sección |
-| Proyecto personal 02 — Detalle | `124:6876` | 1440 × 3113 | ❌ no implementado |
-| Proyecto personal 03 — Detalle | `124:7005` | 1440 × 3179 | ❌ no implementado |
+| Entrada — Consola de bienvenida | `124:6385` | 1440 × 1000 | MCP de Figma |
+| Portfolio principal — Facundo | `124:6436` | 1440 × 3715 | MCP de Figma |
+| Proyecto personal 01 — Detalle | `124:6702` | 1440 × 2937 | MCP + exportación (sección "Lectura") |
+| Proyecto personal 02 — Detalle | `124:6876` | 1440 × 3113 | exportación |
+| Proyecto personal 03 — Detalle | `124:7005` | 1440 × 3179 | exportación |
 
 ### Secciones del portfolio principal
 
@@ -56,47 +59,43 @@ npm run preview    # sirve dist/ localmente
 | 05 | Contacto | `124:6685` | `home/Contacto.astro` | `#contacto` | `night` |
 | — | Pie de página | `124:6698` | `Footer.astro` | — | `night` |
 
-### Secciones del Proyecto 01
+### Secciones de las páginas de proyecto
 
-| Sección (Figma) | Node | Implementación |
-|---|---|---|
-| Navegación principal | `124:6703` | `proyecto/DetalleNav.astro` |
-| Cabecera del proyecto | `124:6714` | `proyecto/Cabecera.astro` |
-| Presentación visual | `124:6742` | `visuals/Visual01.astro` (variante `hero`) |
-| **Lectura del proyecto** | **`124:6796`** | **❌ pendiente** (alto 1181px; va entre la presentación visual y la navegación entre proyectos) |
-| Navegación entre proyectos | `124:6853` | `proyecto/OtrosProyectos.astro` |
-| Pie de página | `124:6872` | `Footer.astro` |
+Las tres páginas comparten la navegación (`DetalleNav`), la ruta (`Ruta`), la barra "LEER PROYECTO" (`IndiceLectura`), "Seguí explorando" (`OtrosProyectos`) y el pie (`Footer`). El resto cambia en cada caso:
+
+| Proyecto | Secciones propias (en orden) |
+|---|---|
+| 01 | Cabecera con nota "// antes de empezar" y datos en fila · Visual01 grande · **Lectura**: punto de partida (3 columnas), proceso (3 tarjetas), solución + aprendizajes (2 columnas) |
+| 02 | Cabecera con nota "ESTUDIO PERSONAL" · galería: imagen 3D + datos en tarjeta + rombo · contexto + objetivo · proceso con diagrama de círculos y 3 pasos (fondo `surface`) · tarjeta mint de solución + aprendizajes |
+| 03 | Cabecera junto a Visual03 grande · datos en fila · planteamiento (3 columnas) · registro del proceso en tabla (fondo `surface`) · solución con bloque de código · aprendizajes con `/* */` |
+
+Anclas comunes en las páginas de proyecto: `#contexto`, `#proceso`, `#solucion`, `#aprendizajes`.
 
 **Figma es la referencia visual.** Si el diseño cambia, el sitio se actualiza para coincidir con Figma.
 
 ---
 
-## 3. Pendientes de construcción
+## 3. Cómo leer los diseños (MCP o exportación)
 
-El plan Starter de Figma corta las llamadas del MCP después de cierta cantidad de usos, y el límite se alcanzó a mitad de la implementación. Lo que falta hay que leerlo de Figma cuando el límite se restablezca (o con un plan superior):
+El MCP de Figma del plan Starter tiene un límite de llamadas, y se alcanzó durante la implementación. Los tres frames de detalle se terminaron a partir de exportaciones en `Diseños/`:
 
-1. **Proyecto 01: sección "Lectura del proyecto"** (node `124:6796`). Hay que agregarla en `proyecto-01.astro`, entre la presentación visual y `<OtrosProyectos />`.
-2. **Página del Proyecto 02** (frame `124:6876`). Secciones: Navegación (`124:6877`), Apertura de galería (`124:6888`), Contexto y objetivo (`124:6933`), Proceso del proyecto (`124:6944`), Cierre del proyecto (`124:6970`), Navegación entre proyectos (`124:6982`) y Pie (`124:7001`).
-3. **Página del Proyecto 03** (frame `124:7005`). Secciones: Navegación (`124:7006`), Apertura del proyecto (`124:7017`), Planteamiento (`124:7085`), Registro del proceso (`124:7100`), Solución (`124:7138`), Aprendizajes (`124:7152`), Navegación entre proyectos (`124:7161`) y Pie (`124:7180`).
+- **SVG** (exportado con "Outline text"): trae formas, colores, radios, bordes e imágenes embebidas con coordenadas exactas, pero los textos quedan como trazos.
+- **PDF**: conserva los textos con su posición y tamaño. Las fuentes vienen como "Type3", así que no tienen nombre ni color: el texto monoespaciado se reconoce porque cada carácter mide 0.6 veces el tamaño de la fuente, y el color se toma del render.
+- Escala 1:1: 1pt del PDF equivale a 1px de Figma.
 
-Para cada página nueva (receta 8.5):
-- Reutilizá `DetalleNav`, `OtrosProyectos` y `Footer`, que tienen el mismo nombre en los tres frames de detalle. Verificalo igual en Figma.
-- Creá `src/pages/proyectos/proyecto-0X.astro`.
-- Agregá `href: '/proyectos/proyecto-0X'` al proyecto en `src/data/proyectos.ts`. **Hasta que exista la página, el proyecto no tiene `href`**: su tarjeta y su acceso en "Seguí explorando" se muestran sin enlace, para no llevar a un 404.
-
-**No inventes el diseño de las secciones pendientes:** leelo de Figma.
+Si se vuelve a exportar desde Figma, conviene **destildar "Outline text"** en el SVG: así los textos se leen directo del SVG.
 
 ---
 
 ## 4. Reglas
 
-1. **Usá los tokens, no hex sueltos** (sección 6): `bg-surface`, `text-mist`, `border-edge`, etc. La única excepción son los colores internos de las ilustraciones (`src/components/visuals/`), que son propios de cada dibujo.
+1. **Usá los tokens, no hex sueltos** (sección 6): `bg-surface`, `text-mist`, `border-edge`, etc. La única excepción son los colores internos de las ilustraciones (`src/components/visuals/` y el diagrama de círculos del Proyecto 02).
 2. **Cada tipo de texto tiene su fuente:** `font-display` (Space Grotesk) para titulares y cifras, `font-sans` (Inter) para el cuerpo y `font-mono` (IBM Plex Mono) para anotaciones, navegación, botones, etiquetas y todo lo que imite código.
-3. **El tono es de código y consola:** anotaciones como `// comentario`, `01 / acerca_de_mí` y `proyecto_01`, etiquetas `<proyecto_01>`, símbolos `</>`. Mantené ese lenguaje en el contenido nuevo.
-4. **El acento es uno solo: `mint`.** Se usa en índices de sección, links, cifras, el cursor y los botones principales.
+3. **El tono es de código y consola:** anotaciones como `// comentario`, `01 / acerca_de_mí` y `proyecto_01`, etiquetas `<proyecto_01>`, símbolos `</>` y `/* */`. Mantené ese lenguaje en el contenido nuevo.
+4. **El acento principal es `mint`.** `code-blue` y `code-violet` se usan solo como color de "sintaxis" (PREGUNTA, EVIDENCIA, `{ }`, el bloque de código).
 5. **Cada sección numerada empieza con una anotación** `<p class="note text-mint">0X / nombre_en_snake_case</p>`. Si agregás o sacás una sección, renumerá.
-6. **El contenedor de sección es `container-page`**: máximo 1440px, márgenes de 20, 40 y 72px. Las líneas de borde de la nav y del pie ocupan todo el ancho (el borde va afuera del contenedor).
-7. **El layout es mobile-first:** en pantallas chicas todo se apila y desde `lg:` (≥1024px) se usan las columnas de Figma. Los anchos fijos llevan `lg:`.
+6. **El contenedor de sección es `container-page`**: máximo 1440px, márgenes de 20, 40 y 72px. Las líneas de borde de la nav y del pie ocupan todo el ancho.
+7. **El layout es mobile-first:** en pantallas chicas todo se apila y desde `lg:` (≥1024px) se usan las columnas de Figma. En las grillas de dos columnas con anchos de Figma se usa la proporción en `fr` (por ejemplo, `lg:grid-cols-[840fr_416fr]`), así escalan. **Ojo:** `[1fr_660fr]` deja la primera columna en 1/661 del ancho; poné siempre los dos números.
 8. **Titulares con `clamp()`:** el último valor es el tamaño de Figma a 1440px. El tracking negativo de Figma se expresa en `em` (por ejemplo, −1.5px sobre 50px = `tracking-[-0.03em]`).
 9. **El interlineado por defecto es `normal`**, como en Figma (incluidos `text-xs` a `text-xl`). El cuerpo usa `body-copy` (1.65) y las anotaciones usan `note` (1.5).
 10. **Los datos personales van en `src/data/site.ts`**; nunca escribas el nombre a mano en un componente.
@@ -111,26 +110,38 @@ Para cada página nueva (receta 8.5):
 ```
 PortFolioFacu/
 ├── PORTFOLIO.md / AGENTS.md
-├── public/images/              # SVG y PNG exportados de Figma (sección 7)
+├── Diseños/                    # exportaciones SVG + PDF de los frames de detalle
+├── public/images/              # SVG, PNG y JPG exportados de Figma (sección 7)
 └── src/
     ├── data/
     │   ├── site.ts             # nombre, slug, email, roles
-    │   └── proyectos.ts        # los 3 proyectos (tarjetas, navegación y detalle)
+    │   └── proyectos.ts        # los 3 proyectos: tarjeta, subtítulo, datos, href
     ├── layouts/Layout.astro    # <head>, título, descripción
     ├── styles/global.css       # Tailwind + tokens + utilidades
     ├── pages/
     │   ├── index.astro         # entrada (consola)
     │   ├── portfolio.astro     # portfolio principal
-    │   └── proyectos/proyecto-01.astro
+    │   └── proyectos/proyecto-01|02|03.astro
     └── components/
-        ├── Logo.astro          # "</ Facundo."
-        ├── Nav.astro           # barra superior (links + botón Hablemos)
-        ├── Footer.astro        # pie (© + texto o link a la derecha)
-        ├── Pill.astro          # etiqueta redondeada (tone neutral | mint)
+        ├── Logo, Nav, Footer, Pill
         ├── home/               # secciones del portfolio principal
-        ├── proyecto/           # piezas de las páginas de detalle
+        ├── proyecto/           # piezas de las páginas de detalle (tabla de abajo)
         └── visuals/            # ilustraciones dibujadas en código
 ```
+
+Componentes de `proyecto/`:
+
+| Componente | Props | Qué es |
+|---|---|---|
+| `DetalleNav` | — | nav con "← Portfolio · Proyectos · Acerca de mí · Hablemos" |
+| `Ruta` | `numero` | "← Portfolio / Proyectos / 0X" + "ARCHIVO PERSONAL / 0X" |
+| `Titulo` | `numero, subtitulo, estado?, size? ('xl' 88px / 'lg' 74px), anotacion?` | `<proyecto_0X>` + pill + "Proyecto personal 0X" + bajada |
+| `Datos` | `datos, variant? ('fila' / 'tarjeta')` | rol, herramientas y contexto |
+| `RecursoBadge` | — | etiqueta "RECURSO VISUAL CONCEPTUAL" (dentro de una ilustración) |
+| `Leyenda` | — | "↳ Exploración visual abstracta…" |
+| `IndiceLectura` | `numero` | barra "LEER PROYECTO_0X ↓ · 01. Contexto …" |
+| `Columna` | `etiqueta, titulo, texto, estado?, id?` | anotación + título de 34px + texto + "[ Contenido por completar ]" |
+| `OtrosProyectos` | `actual` | "Seguí explorando el archivo" con los otros dos proyectos |
 
 ---
 
@@ -141,15 +152,19 @@ Están en `@theme`, dentro de `src/styles/global.css`.
 | Token | Hex | Uso |
 |---|---|---|
 | `night` | `#0c1018` | fondo principal |
-| `surface` | `#121924` | secciones alternadas, consola |
+| `surface` | `#121924` | secciones alternadas, consola, tarjetas |
 | `raised` | `#192332` | pills, barra de la consola, cajas |
+| `panel` | `#162332` | caja del bloque de código (solución, P03) |
 | `edge` | `#2a3544` | bordes y separadores |
 | `snow` | `#f1f3ef` | texto principal |
 | `mist` | `#a7b2c2` | texto secundario |
 | `slate` | `#7e8da3` | texto terciario y anotaciones grises |
 | `mint` | `#8cf0cb` | acento |
-| `mint-ink` | `#091211` | texto sobre botón mint |
+| `mint-ink` | `#091211` | texto sobre fondo mint |
+| `mint-muted` | `#21483d` | texto secundario sobre fondo mint |
 | `mint-deep` | `#152f2c` | fondo de la pill mint y del identificador de proyecto |
+| `code-blue` | `#81d7f7` | sintaxis: `{ }`, "PREGUNTA", "pregunta" |
+| `code-violet` | `#baa3f6` | sintaxis: líneas de código, "EVIDENCIA POR AGREGAR" |
 | `glitch` | `#f48d9d` | copia rosa del efecto glitch del nombre |
 
 | Nombre | Qué es |
@@ -166,17 +181,19 @@ Están en `@theme`, dentro de `src/styles/global.css`.
 
 ## 7. Imágenes y recursos
 
-Están en `public/images/`. Son SVG y PNG exportados de Figma y no se deben redibujar.
+Están en `public/images/`. Son exportaciones de Figma y no se deben redibujar.
 
 | Archivo | Uso |
 |---|---|
 | `consola-indicadores.svg` | 3 puntos de la ventana de la consola (entrada) |
 | `emblema-*.svg` | campos, órbita y punto del emblema de la portada |
-| `tarjeta-01-*.svg` | indicadores, figura y órbita de la ilustración del Proyecto 01 (tarjeta) |
+| `tarjeta-01-*.svg` | indicadores, figura y órbita de Visual01 (tarjeta) |
 | `detalle-01-*.svg` | lo mismo en la versión grande (página del Proyecto 01) |
 | `proyecto-02.png` | render 3D de la tarjeta del Proyecto 02 |
+| `detalle-02.jpg` | render 3D grande de la página del Proyecto 02 (sacado del SVG exportado) |
+| `detalle-02-rombo.svg` | rombo ◇ de la página del Proyecto 02 (vector del SVG exportado) |
 
-Las ilustraciones son **recursos conceptuales, no capturas reales** (así lo aclaran las leyendas "↳ Recursos visuales conceptuales…"). Cuando haya imágenes reales, reemplazá la ilustración por un `<img>` y borrá la leyenda.
+Las ilustraciones son **recursos conceptuales, no capturas reales** (así lo aclaran las leyendas "↳ …"). Cuando haya imágenes reales, reemplazá la ilustración por un `<img>` y borrá la leyenda.
 
 ---
 
@@ -186,8 +203,8 @@ Las ilustraciones son **recursos conceptuales, no capturas reales** (así lo acl
 Editá `src/data/site.ts`. El nombre se actualiza en el logo, la consola, el titular con glitch, el pie y el título de la pestaña. Con el email real, poné `emailEsEjemplo: false` para ocultar "Contacto de ejemplo" y "Reemplazar por tu correo…".
 
 ### 8.2 Completar datos de un proyecto
-- Tarjeta y navegación: en `src/data/proyectos.ts` editá `titulo`, `resumen`, `herramientas` y `estado`.
-- Página de detalle: en `proyecto-0X.astro`, editá las props de `<Cabecera>` (`subtitulo`, `estado`, `nota`, `datos`).
+- En `src/data/proyectos.ts`: `titulo`, `resumen` (tarjeta), `subtitulo` (página), `herramientas`, `estado` y `datos` (rol, herramientas y contexto, que se ven en la cabecera de la página).
+- Textos de lectura (contexto, objetivo, proceso, solución, aprendizajes): en `proyecto-0X.astro`, props de cada `<Columna>` y arrays `pasos` / `registros`. Cuando un texto ya es real, borrá su `estado` (`estado=""`) para quitar "[ Contenido por completar ]".
 
 ### 8.3 Cambiar textos de la página principal
 Cada sección está en `src/components/home/`. Las listas (intereses, cifras, capacidades, hitos de formación) son arrays al principio de cada archivo.
@@ -195,14 +212,17 @@ Cada sección está en `src/components/home/`. Las listas (intereses, cifras, ca
 ### 8.4 Agregar redes al contacto
 En `home/Contacto.astro`, debajo del email, agregá links `font-mono text-[13px] text-mist hover:text-mint`.
 
-### 8.5 Construir una página de proyecto pendiente
-1. Leé el frame de Figma por secciones (sección 3, con sus node ids).
-2. Creá `src/pages/proyectos/proyecto-0X.astro` con `Layout`, `DetalleNav`, las secciones propias, `<OtrosProyectos actual="0X" />` y `<Footer label="← Volver al índice de proyectos" href="/portfolio#proyectos" />`.
-3. Si una sección se repite entre proyectos, convertila en componente dentro de `components/proyecto/`.
-4. Agregá `href` al proyecto en `src/data/proyectos.ts`.
-5. Actualizá las secciones 2 y 3 de esta guía.
+### 8.5 Agregar imágenes reales a un proyecto
+1. Copiá la imagen a `public/images/`.
+2. Página: reemplazá la ilustración (`<Visual0X variant="hero">` o la imagen del P02) por `<img class="rounded-xl" …>` con su `alt`, y borrá `<Leyenda />` y `<RecursoBadge />`.
+3. Tarjeta en el portfolio: en `home/Proyectos.astro`, reemplazá `<Visual0X …>` por la imagen, y actualizá la leyenda "↳ Recursos visuales conceptuales…".
 
-### 8.6 Cambiar colores o fuentes
+### 8.6 Agregar un cuarto proyecto
+1. Agregalo a `src/data/proyectos.ts` (ampliá el tipo `numero`).
+2. Creá `src/pages/proyectos/proyecto-04.astro` reutilizando los componentes de `proyecto/`.
+3. Agregá su tarjeta en `home/Proyectos.astro` y revisá textos que dicen "Tres proyectos", "[ 01 — 03 ]" y "3 proyectos personales" (entrada).
+
+### 8.7 Cambiar colores o fuentes
 - Colores: cambialos en `@theme` y actualizá la tabla de la sección 6.
 - Fuentes: instalá `@fontsource(-variable)/<fuente>`, importala en `global.css` y cambiá la variable `--font-*`.
 
@@ -210,7 +230,7 @@ En `home/Contacto.astro`, debajo del email, agregá links `font-mono text-[13px]
 
 ## 9. Cómo funcionan las ilustraciones
 
-Las ilustraciones (`visuals/`) están **dibujadas con HTML y CSS**, con las medidas exactas de Figma, y escalan con el ancho del contenedor:
+Las ilustraciones (`visuals/` y el diagrama de círculos del Proyecto 02) están **dibujadas con HTML y CSS**, con las medidas de Figma, y escalan con el ancho del contenedor:
 
 - El contenedor lleva la clase `canvas` y `style="--canvas: <ancho en Figma>"`.
 - Adentro, `canvas-inner` define `1em = 1px del diseño` (`font-size: calc(100cqw / var(--canvas))`).
@@ -219,42 +239,45 @@ Las ilustraciones (`visuals/`) están **dibujadas con HTML y CSS**, con las medi
 
 | Componente | Lienzo | Dónde |
 |---|---|---|
-| `Visual01` `variant="card"` | 416 × 320 | tarjeta del Proyecto 01 |
-| `Visual01` `variant="hero"` | 1296 × 600 | página del Proyecto 01 |
+| `Visual01` `variant="card"` / `"hero"` | 416 × 320 / 1296 × 600 | tarjeta / página del Proyecto 01 |
 | `Visual02` | 416 × 320 | tarjeta del Proyecto 02 (imagen) |
-| `Visual03` | 416 × 320 | tarjeta del Proyecto 03 |
+| `Visual03` `variant="card"` / `"hero"` | 416 × 320 / 660 × 480 | tarjeta / página del Proyecto 03 |
 | `Emblema` | 468 × 484 | portada del portfolio |
 | `GlitchName` | en `em` del tamaño del texto (112px) | nombre de la portada |
+| Diagrama de círculos | 360 × 232 | proceso del Proyecto 02 (inline en la página) |
 
 ---
 
 ## 10. Checklist de verificación
 
 1. `npm run build` termina sin errores.
-2. Revisá cada página a **1440px** (compará con Figma), a **~768px** y a **~375px**.
+2. Revisá cada página a **1440px** (compará con Figma o con el PDF de `Diseños/`), a **~768px** y a **~375px**.
 3. No hay scroll horizontal en celular.
-4. Funcionan los links de la navegación, los botones, los accesos a proyectos y "Volver al índice", y en la entrada, "y"/Enter y el clic en "❯ y".
-5. Ningún link lleva a una página inexistente (proyectos sin `href` = sin link).
-6. No quedaron hex sueltos fuera de `visuals/`.
+4. Funcionan los links de la navegación, los botones, la barra "LEER PROYECTO", los accesos a proyectos y "Volver al índice", y en la entrada, "y"/Enter y el clic en "❯ y".
+5. Ningún link lleva a una página inexistente.
+6. No quedaron hex sueltos fuera de las ilustraciones.
 7. Si cambiaste estructura, tokens o recetas, actualizaste esta guía.
 
-Verificación inicial: las alturas de las secciones quedan a menos de 7px de Figma a 1440px, no hay desbordes a 375px y el build no da errores.
+Verificación realizada (2026-11-19):
+- A 1440px, todas las secciones de las 5 páginas quedan a 7px o menos de Figma: P01 2563 contra 2561, P02 con diferencias de 4px o menos, P03 con diferencias de 7px o menos.
+- No hay desbordes a 375px.
+- El build no da errores.
 
 ---
 
 ## 11. Notas técnicas
 
 - **Node y Astro:** Astro 7 exige Node ≥ 22.23.4 y la máquina original tiene 22.17, por eso Astro está en 5.18. Para actualizar, subí Node y después corré `npm install astro@latest`.
-- **Astro 5 no tiene `astro dev --background`.**
+- **Astro 5 no tiene `astro dev --background`.** Si el 4321 está ocupado (por ejemplo, con el portfolio de Gonzalo), `npm run dev` usa el 4322.
+- **Slots de componentes:** en `Titulo`, el contenido pasado por `<slot />` se perdía en el build, así que la línea extra se pasa como prop (`anotacion`). Para textos opcionales, preferí props.
 - **Navegador headless:** Chrome y Edge headless no bajan de ~500px de ancho. Para probar celular, usá un iframe de 375px o las DevTools.
-- **Nombre en el diseño:** Figma usa "Tu nombre" como texto de ejemplo, y en el sitio se reemplazó por `site.nombre` ("Facundo"). El email sigue siendo el de ejemplo del diseño.
+- **Nombre en el diseño:** Figma usa "Tu nombre" como texto de ejemplo, y en el sitio se reemplazó por `site.nombre` ("Facundo"). El email sigue siendo el de ejemplo.
 
 ---
 
 ## 12. Pendientes de contenido
 
 - [ ] Email real y perfiles (`site.ts`, receta 8.1).
-- [ ] Proyectos: nombres, descripciones, herramientas, rol y contexto (receta 8.2).
+- [ ] Proyectos: nombres, descripciones, herramientas, rol, contexto y textos de lectura (receta 8.2).
 - [ ] Formación: nombres de cursos, instituciones y período.
-- [ ] Imágenes reales de los proyectos en lugar de las ilustraciones conceptuales.
-- [ ] Construir lo pendiente de la sección 3.
+- [ ] Imágenes reales de los proyectos en lugar de las ilustraciones conceptuales (receta 8.5).

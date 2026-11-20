@@ -1,80 +1,108 @@
 ---
 /**
- * Ilustración conceptual del Proyecto 03 (tarjeta 416 × 320, node 124:6598):
- * núcleo de código con conexiones sobre líneas de escaneo. Medidas en px del
- * diseño aplicadas en "em".
+ * Ilustración conceptual del Proyecto 03: núcleo de código con conexiones
+ * sobre líneas de escaneo. Variantes medidas en Figma:
+ * "card" (tarjeta 416 × 320, node 124:6598) y "hero" (detalle 660 × 480, frame 124:7005).
+ * Medidas en px del diseño aplicadas en "em" (ver utilidad canvas en global.css).
  */
 interface Props {
   coordenada: string;
+  variant?: 'card' | 'hero';
   class?: string;
 }
 
-const { coordenada, class: className } = Astro.props;
+const { coordenada, variant = 'card', class: className } = Astro.props;
 
-const nodos = [
-  { l: 353.6, t: 217.6 },
-  { l: 341.12, t: 80 },
-  { l: 49.92, t: 192 },
-];
-const conexiones = [
-  { l: 303.68, t: 217.6, w: 49.92, h: 1 },
-  { l: 341.12, t: 80, w: 16.64, h: 1 },
-  { l: 357.76, t: 80, w: 1, h: 48 },
-  { l: 303.68, t: 128, w: 54.08, h: 1 },
-  { l: 49.92, t: 192, w: 62.4, h: 1 },
-];
+const v = {
+  card: {
+    W: 416, H: 320,
+    text: { l: 16.64, t: 281.6 },
+    core: { l: 112.32, t: 64, w: 191.36, h: 192, r: 8 },
+    braces: { l: 15.64, t: 16.6, fs: 38.133 },
+    lines: { l: 15.64, t: 104.6 },
+    node: 8,
+    nodos: [ { l: 353.6, t: 217.6 }, { l: 341.12, t: 80 }, { l: 49.92, t: 192 } ],
+    conexiones: [
+      { l: 303.68, t: 217.6, w: 49.92, h: 1 },
+      { l: 341.12, t: 80, w: 16.64, h: 1 },
+      { l: 357.76, t: 80, w: 1, h: 48 },
+      { l: 303.68, t: 128, w: 54.08, h: 1 },
+      { l: 49.92, t: 192, w: 62.4, h: 1 },
+    ],
+    scan: 18.8235,
+  },
+  hero: {
+    W: 660, H: 480,
+    text: { l: 26.4, t: 422.4 },
+    core: { l: 178.2, t: 96, w: 303.6, h: 288, r: 8 },
+    braces: { l: 24.8, t: 26.3, fs: 60.5 },
+    lines: { l: 24.8, t: 158.5 },
+    node: 9.9,
+    nodos: [ { l: 541.2, t: 120 }, { l: 79.2, t: 288 }, { l: 561, t: 326.4 } ],
+    conexiones: [
+      { l: 541.2, t: 120, w: 26.4, h: 1 },
+      { l: 567.6, t: 120, w: 1, h: 72 },
+      { l: 481.8, t: 192, w: 85.8, h: 1 },
+      { l: 79.2, t: 288, w: 99, h: 1 },
+      { l: 481.8, t: 326.4, w: 79.2, h: 1 },
+    ],
+    scan: 28.235,
+  },
+}[variant];
+
 const em = (n: number) => `${n}em`;
+const px1 = (n: number) => (n === 1 ? '1px' : em(n));
 ---
 
 <div
   class:list={['canvas relative overflow-hidden rounded-xl bg-[#171f35]', className]}
-  style={{ '--canvas': 416, aspectRatio: '416 / 320' }}
+  style={{ '--canvas': v.W, aspectRatio: `${v.W} / ${v.H}` }}
   role="img"
   aria-label="Ilustración conceptual: un bloque de código conectado a nodos"
 >
   <div class="canvas-inner absolute inset-0">
-    <p class="absolute top-[281.6em] left-[16.64em] font-mono whitespace-nowrap text-mist">
+    <!-- La posición va en el contenedor y el tamaño en el texto (ver PORTFOLIO.md, sección 9) -->
+    <p class="absolute font-mono whitespace-nowrap text-mist" style={{ left: em(v.text.l), top: em(v.text.t) }}>
       <span class="text-[8em]">{coordenada}</span>
     </p>
 
     {
-      nodos.map((n) => (
+      v.nodos.map((n) => (
         <span
           class="absolute box-border border-[3px] border-[#101a2c] bg-mint"
-          style={{ left: em(n.l), top: em(n.t), width: em(8), height: em(8) }}
+          style={{ left: em(n.l), top: em(n.t), width: em(v.node), height: em(v.node) }}
         />
       ))
     }
 
     <!-- Núcleo de código -->
     <div
-      class="absolute top-[64em] left-[112.32em] h-[192em] w-[191.36em] overflow-hidden rounded-[0.5em] border border-[#4e6180] bg-[#11182a] font-mono whitespace-nowrap shadow-float"
+      class="absolute overflow-hidden border border-[#4e6180] bg-[#11182a] font-mono whitespace-nowrap shadow-float"
+      style={{ left: em(v.core.l), top: em(v.core.t), width: em(v.core.w), height: em(v.core.h), borderRadius: em(v.core.r) }}
     >
-      <p class="absolute top-[16.6em] left-[15.64em]">
-        <span class="block text-[38.133em] tracking-[-0.045em] text-[#81d7f7]">{'{ }'}</span>
+      <p class="absolute" style={{ left: em(v.braces.l), top: em(v.braces.t) }}>
+        <span class="block tracking-[-0.045em] text-code-blue" style={{ fontSize: em(v.braces.fs) }}>{'{ }'}</span>
       </p>
-      <p class="absolute top-[104.6em] left-[15.64em]">
-        <span class="block text-[11em] leading-[1.7] text-[#baa3f6]">idea → lógica<br />lógica → posibilidad</span>
+      <p class="absolute" style={{ left: em(v.lines.l), top: em(v.lines.t) }}>
+        <span class="block text-[11em] leading-[1.7] text-code-violet">idea → lógica<br />lógica → posibilidad</span>
       </p>
     </div>
 
     {
-      conexiones.map((c) => (
-        <span
-          class="absolute bg-[#6d8aac]"
-          style={{ left: em(c.l), top: em(c.t), width: c.w === 1 ? '1px' : em(c.w), height: c.h === 1 ? '1px' : em(c.h) }}
-        />
+      v.conexiones.map((c) => (
+        <span class="absolute bg-[#6d8aac]" style={{ left: em(c.l), top: em(c.t), width: px1(c.w), height: px1(c.h) }} />
       ))
     }
 
-    <!-- Líneas de escaneo cada 18.82px -->
+    <!-- Líneas de escaneo -->
     <div
       class="absolute inset-0"
       style={{
         backgroundImage: 'linear-gradient(to bottom, #25304b 1px, transparent 1px)',
-        backgroundSize: '100% 18.8235em',
+        backgroundSize: `100% ${em(v.scan)}`,
       }}
     >
     </div>
   </div>
+  <slot />
 </div>

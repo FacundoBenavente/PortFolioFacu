@@ -18,6 +18,10 @@
   --color-mint-ink: #091211;
   --color-mint-deep: #152f2c;
   --color-glitch: #f48d9d;
+  --color-mint-muted: #21483d;
+  --color-panel: #162332;
+  --color-code-blue: #81d7f7;
+  --color-code-violet: #baa3f6;
 
   --font-display: "Space Grotesk Variable", "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;

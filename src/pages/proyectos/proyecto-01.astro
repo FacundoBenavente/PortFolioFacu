@@ -1,47 +1,128 @@
 ---
-/**
- * Proyecto personal 01 — Detalle (Figma frame 124:6702).
- * Pendiente: la sección "Lectura del proyecto" (node 124:6796) no se pudo leer
- * de Figma (límite de uso del plan) y todavía no está implementada.
- */
+/** Proyecto personal 01 — Detalle (Figma frame 124:6702). */
 import Layout from '../../layouts/Layout.astro';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
-import Cabecera from '../../components/proyecto/Cabecera.astro';
+import Ruta from '../../components/proyecto/Ruta.astro';
+import Titulo from '../../components/proyecto/Titulo.astro';
+import Datos from '../../components/proyecto/Datos.astro';
+import RecursoBadge from '../../components/proyecto/RecursoBadge.astro';
+import Leyenda from '../../components/proyecto/Leyenda.astro';
+import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
+import Columna from '../../components/proyecto/Columna.astro';
 import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
 import Visual01 from '../../components/visuals/Visual01.astro';
 import Footer from '../../components/Footer.astro';
 import { site } from '../../data/site';
-import { proyectos } from '../../data/proyectos';
+import { getProyecto } from '../../data/proyectos';
 
-const proyecto = proyectos.find((p) => p.numero === '01')!;
+const p = getProyecto('01');
+
+const pasos = [
+  {
+    n: '01_',
+    titulo: 'Exploración',
+    texto: 'Documentar el punto de partida y el material que ayudó a entender el desafío.',
+  },
+  {
+    n: '02_',
+    titulo: 'Decisiones',
+    texto: 'Mostrar alternativas y explicar qué criterios guiaron las decisiones del proyecto.',
+  },
+  {
+    n: '03_',
+    titulo: 'Desarrollo',
+    texto: 'Agregar iteraciones, pruebas y ajustes realizados, cuando corresponda.',
+  },
+];
 ---
 
-<Layout title={`${proyecto.titulo} — ${site.nombre}`}>
+<Layout title={`${p.titulo} — ${site.nombre}`}>
   <DetalleNav />
   <main>
-    <Cabecera
-      numero="01"
-      subtitulo="Un espacio para contar cómo una idea toma forma."
-      estado="Ficha por completar"
-      notaTitulo="antes de empezar"
-      nota="El proyecto está producido. Su nombre, contexto y decisiones se incorporarán a esta ficha con información real."
-      datos={[
-        { etiqueta: 'ROL EN EL PROYECTO', valor: 'Por completar', detalle: 'Indicar responsabilidades reales.' },
-        { etiqueta: 'HERRAMIENTAS', valor: 'Por completar', detalle: 'Agregar las herramientas utilizadas.' },
-        { etiqueta: 'CONTEXTO Y FECHA', valor: 'Por completar', detalle: 'Precisar alcance y período.' },
-      ]}
-    />
+    <!-- Cabecera del proyecto -->
+    <section class="container-page flex flex-col gap-10 pt-[34px] pb-10">
+      <Ruta numero="01" />
+      <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-[100px]">
+        <Titulo numero="01" subtitulo={p.subtitulo} class="flex-1" />
+        <div class="flex flex-col gap-3.5 pb-2.5 lg:w-[290px] lg:shrink-0">
+          <p class="note text-mint">// antes de empezar</p>
+          <p class="body-copy text-sm">
+            El proyecto está producido. Su nombre, contexto y decisiones se incorporarán a esta ficha con
+            información real.
+          </p>
+        </div>
+      </div>
+      <Datos datos={p.datos} />
+    </section>
 
     <!-- Presentación visual -->
     <section class="container-page flex flex-col gap-4 pb-12">
-      <Visual01 variant="hero" coordenada={proyecto.coordenada}>
-        <span class="absolute top-6 right-6 rounded-full bg-night/80 px-3 py-[7px] font-mono text-[11px] text-snow">
-          RECURSO VISUAL CONCEPTUAL
-        </span>
-      </Visual01>
-      <p class="font-mono text-[11px] leading-[1.5] text-slate">
-        ↳ Exploración visual abstracta. No representa una captura, entregable ni resultado del proyecto.
-      </p>
+      <Visual01 variant="hero" coordenada={p.coordenada}><RecursoBadge /></Visual01>
+      <Leyenda />
+    </section>
+
+    <!-- Lectura del proyecto -->
+    <section class="container-page pb-[72px]">
+      <IndiceLectura numero="01" />
+
+      <div id="contexto" class="mt-16 grid scroll-mt-4 gap-12 lg:grid-cols-[320px_1fr_1fr] lg:gap-x-24">
+        <div class="flex flex-col gap-4">
+          <p class="note text-mint">01 / punto_de_partida</p>
+          <h2 class="font-display text-[clamp(34px,3.1vw,44px)] leading-[1.08] font-bold tracking-[-0.034em]">
+            La idea detrás<br />del proyecto.
+          </h2>
+        </div>
+        <Columna
+          etiqueta="// contexto"
+          titulo="¿De dónde nace?"
+          texto="Agregar qué motivó el proyecto, a quién se dirige y qué necesidad o pregunta lo puso en marcha."
+        />
+        <Columna
+          etiqueta="// objetivo"
+          titulo="¿Qué buscaba resolver?"
+          texto="Definir el objetivo principal, el alcance y las condiciones de trabajo. Incluir solo información comprobable."
+        />
+      </div>
+
+      <div id="proceso" class="mt-20 scroll-mt-4">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div class="flex flex-col gap-4">
+            <p class="note text-mint">02 / proceso</p>
+            <h2 class="font-display text-[clamp(34px,3.1vw,44px)] leading-[1.08] font-bold tracking-[-0.034em]">
+              De la pregunta a la decisión.
+            </h2>
+          </div>
+          <p class="note text-slate">Guion de proceso por completar</p>
+        </div>
+        <ol class="mt-8 grid gap-6 md:grid-cols-3">
+          {
+            pasos.map((paso) => (
+              <li class="flex flex-col gap-6 rounded-xl border border-edge bg-surface p-7">
+                <span class="font-mono text-[30px] text-mint">{paso.n}</span>
+                <h3 class="font-display text-[26px] tracking-[-0.02em]">{paso.titulo}</h3>
+                <p class="body-copy text-[15px]">{paso.texto}</p>
+                <span class="h-0.5 w-10 bg-edge" aria-hidden="true" />
+                <span class="font-mono text-[10px] text-slate">POR DOCUMENTAR</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+
+      <div class="mt-16 grid gap-12 border-t border-edge pt-12 md:grid-cols-2 md:gap-20">
+        <Columna
+          id="solucion"
+          etiqueta="// 03 / solución"
+          titulo="Lo que se construyó."
+          texto="Incorporar la solución final y sus recursos reales. Explicar cómo responde al objetivo sin atribuir resultados no medidos."
+        />
+        <Columna
+          id="aprendizajes"
+          etiqueta="// 04 / aprendizajes"
+          titulo="Lo que me llevo."
+          texto="Compartir un aprendizaje concreto, una dificultad y qué haría distinto en una próxima versión."
+        />
+      </div>
     </section>
 
     <OtrosProyectos actual="01" />

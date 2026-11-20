@@ -1,0 +1,162 @@
+---
+/** Proyecto personal 02 — Detalle (Figma frame 124:6876). */
+import Layout from '../../layouts/Layout.astro';
+import DetalleNav from '../../components/proyecto/DetalleNav.astro';
+import Ruta from '../../components/proyecto/Ruta.astro';
+import Titulo from '../../components/proyecto/Titulo.astro';
+import Datos from '../../components/proyecto/Datos.astro';
+import RecursoBadge from '../../components/proyecto/RecursoBadge.astro';
+import Leyenda from '../../components/proyecto/Leyenda.astro';
+import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
+import Columna from '../../components/proyecto/Columna.astro';
+import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
+import Footer from '../../components/Footer.astro';
+import { site } from '../../data/site';
+import { getProyecto } from '../../data/proyectos';
+
+const p = getProyecto('02');
+
+const pasos = [
+  {
+    titulo: 'Entender el contexto',
+    texto:
+      'Agregar referencias, preguntas y observaciones que orientaron el inicio. Diferenciar hechos de suposiciones.',
+  },
+  {
+    titulo: 'Explorar alternativas',
+    texto: 'Mostrar propuestas e iteraciones reales. Explicar por qué algunas ideas se mantuvieron y otras no.',
+  },
+  {
+    titulo: 'Tomar decisiones',
+    texto: 'Relacionar los ajustes finales con el objetivo. Incorporar pruebas o devoluciones únicamente si existieron.',
+  },
+];
+---
+
+<Layout title={`${p.titulo} — ${site.nombre}`}>
+  <DetalleNav />
+  <main>
+    <!-- Apertura de galería -->
+    <section class="container-page flex flex-col gap-10 pt-[34px]">
+      <Ruta numero="02" />
+      <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-[100px]">
+        <Titulo numero="02" subtitulo={p.subtitulo} class="flex-1" />
+        <div class="flex flex-col gap-3.5 pb-2.5 lg:w-80 lg:shrink-0">
+          <p class="note text-mint">ESTUDIO PERSONAL / 02</p>
+          <p class="body-copy text-sm">
+            Una ficha para dar lugar al contexto, al proceso y a las decisiones de este proyecto producido.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-[840fr_416fr]">
+        <div class="flex flex-col gap-4">
+          <div class="relative overflow-hidden rounded-xl bg-surface" style="aspect-ratio: 840 / 620">
+            <img
+              src="/images/detalle-02.jpg"
+              alt="Render 3D de un anillo translúcido verde que rodea un cubo metálico, sobre una superficie oscura"
+              class="absolute inset-0 size-full object-cover"
+            />
+            <RecursoBadge />
+            <p class="absolute top-[88%] left-[4%] font-mono text-[8.4px] whitespace-nowrap text-snow">
+              {p.coordenada}
+            </p>
+          </div>
+          <Leyenda />
+        </div>
+        <div class="flex flex-col">
+          <Datos datos={p.datos} variant="tarjeta" />
+          <div class="mt-10 flex flex-col items-start gap-[21px] px-6 lg:mt-[58px]">
+            <img src="/images/detalle-02-rombo.svg" alt="" width="42.3" height="42.3" class="ml-[2px]" />
+            <p class="body-copy text-sm">
+              La imagen acompaña el lenguaje visual del portfolio. La documentación real se agregará a
+              continuación.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <IndiceLectura numero="02" />
+    </section>
+
+    <!-- Contexto y objetivo -->
+    <section id="contexto" class="container-page grid scroll-mt-4 gap-12 pt-[72px] pb-[72px] md:grid-cols-2 md:gap-x-[100px]">
+      <Columna
+        etiqueta="// 01 / contexto"
+        titulo="El punto de partida."
+        texto="Describir el origen de la propuesta, la situación inicial y las personas o necesidades involucradas."
+      />
+      <Columna
+        etiqueta="// objetivo"
+        titulo="Una intención clara."
+        texto="Agregar qué se buscaba lograr, las limitaciones y el alcance real del proyecto."
+      />
+    </section>
+
+    <!-- Proceso del proyecto -->
+    <section id="proceso" class="scroll-mt-4 bg-surface">
+      <div class="container-page grid gap-12 py-[72px] lg:grid-cols-[460px_1fr] lg:gap-[100px]">
+        <div class="flex flex-col">
+          <p class="note text-mint">02 / proceso</p>
+          <h2 class="mt-6 font-display text-[clamp(40px,3.8vw,54px)] leading-[1.08] font-bold tracking-[-0.034em]">
+            Mirar, probar,<br />ajustar.
+          </h2>
+          <p class="body-copy mt-7 text-[17px]">
+            Este espacio reúne los pasos reales del proyecto. El recorrido y sus evidencias están por
+            documentar.
+          </p>
+          <!-- Diagrama: dos círculos que se cruzan (lienzo 360 × 232) -->
+          <div class="canvas relative mt-[35px] w-full max-w-[360px]" style="--canvas: 360; aspect-ratio: 360 / 232" aria-hidden="true">
+            <div class="canvas-inner absolute inset-0">
+              <span class="absolute top-[1.5em] left-[20.5em] size-[214em] rounded-full border border-[#47665f]"></span>
+              <span class="absolute top-[1.5em] left-[140.5em] size-[214em] rounded-full border border-[#47665f]"></span>
+              <span class="absolute top-[98.7em] left-[172em] size-[18em] rotate-45 bg-mint"></span>
+              <p class="absolute top-[219em] left-[64em] font-mono whitespace-nowrap text-slate">
+                <span class="text-[10em]">exploración ↔ revisión</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <ol>
+          {
+            pasos.map((paso, i) => (
+              <li class="grid grid-cols-[48px_1fr] gap-x-4 border-t border-edge py-[30px] sm:grid-cols-[60px_1fr] sm:gap-x-6">
+                <span class="font-mono text-[22px] text-mint">{String(i + 1).padStart(2, '0')}</span>
+                <div class="flex flex-col gap-3.5">
+                  <h3 class="font-display text-[clamp(22px,2vw,28px)] tracking-[-0.01em]">{paso.titulo}</h3>
+                  <p class="body-copy text-[15px]">{paso.texto}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <!-- Cierre del proyecto -->
+    <section class="container-page grid gap-12 py-[72px] lg:grid-cols-[740fr_508fr] lg:gap-12">
+      <div id="solucion" class="flex scroll-mt-4 flex-col rounded-xl bg-mint p-8 text-mint-ink md:p-10">
+        <p class="note">03 / solución</p>
+        <h2 class="mt-5 font-display text-[clamp(36px,3.4vw,48px)] leading-[1.1] font-bold tracking-[-0.03em]">
+          La solución,<br />con sus decisiones.
+        </h2>
+        <p class="mt-6 text-base leading-[1.65] text-mint-muted">
+          Incluir el trabajo final y explicar cómo responde al objetivo. Agregar imágenes propias y detallar lo
+          que se produjo, sin inventar métricas.
+        </p>
+        <p class="mt-6 font-mono text-[11px] text-mint-muted">[ Contenido por completar ]</p>
+      </div>
+      <Columna
+        id="aprendizajes"
+        class="lg:mt-9"
+        etiqueta="// 04 / aprendizajes"
+        titulo="Lo que cambia después."
+        texto="Agregar qué aprendí, cuál fue el mayor desafío y qué exploraría en una siguiente iteración."
+      />
+    </section>
+
+    <OtrosProyectos actual="02" />
+  </main>
+  <Footer label="← Volver al índice de proyectos" href="/portfolio#proyectos" />
+</Layout>
