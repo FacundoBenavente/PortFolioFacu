@@ -1,8 +1,6 @@
 ---
 import Pill from '../Pill.astro';
-import Visual01 from '../visuals/Visual01.astro';
-import Visual02 from '../visuals/Visual02.astro';
-import Visual03 from '../visuals/Visual03.astro';
+import ProyectoImagen from '../ProyectoImagen.astro';
 import { proyectos } from '../../data/proyectos';
 ---
 
@@ -34,9 +32,11 @@ import { proyectos } from '../../data/proyectos';
                 href={p.href}
                 class:list={['group flex flex-col gap-[22px]', p.href && 'cursor-pointer']}
               >
-                {p.numero === '01' && <Visual01 variant="card" coordenada={p.coordenada} />}
-                {p.numero === '02' && <Visual02 coordenada={p.coordenada} />}
-                {p.numero === '03' && <Visual03 coordenada={p.coordenada} />}
+                <ProyectoImagen
+                  imagen={p.imagen}
+                  aspect="416 / 320"
+                  class="transition-colors group-hover:border-mint"
+                />
                 <div class="flex flex-col items-start gap-4">
                   <div class="flex w-full items-center justify-between text-mint">
                     <span class="font-mono text-xs">proyecto_{p.numero}</span>
@@ -65,10 +65,5 @@ import { proyectos } from '../../data/proyectos';
         })
       }
     </ul>
-
-    <p class="font-mono text-[11px] leading-[1.5] text-slate">
-      ↳ Recursos visuales conceptuales. No son capturas ni resultados de los proyectos. Los detalles se
-      completarán con información real.
-    </p>
   </div>
 </section>

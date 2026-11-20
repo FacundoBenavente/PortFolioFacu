@@ -1,0 +1,33 @@
+---
+/**
+ * Imagen real de un proyecto con bordes redondeados.
+ * Con `aspect` se recorta a esa proporción (object-cover); sin `aspect`
+ * se muestra entera con su proporción original.
+ */
+import type { Imagen } from '../data/proyectos';
+
+interface Props {
+  imagen: Imagen;
+  aspect?: string;
+  eager?: boolean;
+  class?: string;
+}
+
+const { imagen, aspect, eager = false, class: className } = Astro.props;
+---
+
+<div
+  class:list={['relative overflow-hidden rounded-xl border border-edge bg-surface', className]}
+  style={{ aspectRatio: aspect ?? `${imagen.ancho} / ${imagen.alto}` }}
+>
+  <img
+    src={imagen.src}
+    alt={imagen.alt}
+    width={imagen.ancho}
+    height={imagen.alto}
+    loading={eager ? 'eager' : 'lazy'}
+    decoding="async"
+    class="absolute inset-0 size-full object-cover"
+  />
+  <slot />
+</div>

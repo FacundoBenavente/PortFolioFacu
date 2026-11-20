@@ -1,22 +1,22 @@
 ---
-/** Proyecto personal 01 — Detalle (Figma frame 124:6702). */
+/** Futbots — Detalle (diseño: Figma frame 124:6702, "Proyecto personal 01"). */
 import Layout from '../../layouts/Layout.astro';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
 import Ruta from '../../components/proyecto/Ruta.astro';
 import Titulo from '../../components/proyecto/Titulo.astro';
 import Datos from '../../components/proyecto/Datos.astro';
-import RecursoBadge from '../../components/proyecto/RecursoBadge.astro';
 import Leyenda from '../../components/proyecto/Leyenda.astro';
 import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
 import Columna from '../../components/proyecto/Columna.astro';
 import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
-import Visual01 from '../../components/visuals/Visual01.astro';
+import ProyectoImagen from '../../components/ProyectoImagen.astro';
 import Footer from '../../components/Footer.astro';
 import { site } from '../../data/site';
 import { getProyecto } from '../../data/proyectos';
 
 const p = getProyecto('01');
 
+// Proceso: todavía sin documentar
 const pasos = [
   {
     n: '01_',
@@ -36,19 +36,18 @@ const pasos = [
 ];
 ---
 
-<Layout title={`${p.titulo} — ${site.nombre}`}>
+<Layout title={`${p.titulo} — ${site.nombre}`} description={p.resumen}>
   <DetalleNav />
   <main>
     <!-- Cabecera del proyecto -->
     <section class="container-page flex flex-col gap-10 pt-[34px] pb-10">
       <Ruta numero="01" />
       <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-[100px]">
-        <Titulo numero="01" subtitulo={p.subtitulo} class="flex-1" />
+        <Titulo numero="01" titulo={p.titulo} subtitulo={p.subtitulo} estado={p.estado} class="flex-1" />
         <div class="flex flex-col gap-3.5 pb-2.5 lg:w-[290px] lg:shrink-0">
           <p class="note text-mint">// antes de empezar</p>
           <p class="body-copy text-sm">
-            El proyecto está producido. Su nombre, contexto y decisiones se incorporarán a esta ficha con
-            información real.
+            Algunas partes del proceso todavía están por documentar y aparecen marcadas como pendientes.
           </p>
         </div>
       </div>
@@ -57,8 +56,8 @@ const pasos = [
 
     <!-- Presentación visual -->
     <section class="container-page flex flex-col gap-4 pb-12">
-      <Visual01 variant="hero" coordenada={p.coordenada}><RecursoBadge /></Visual01>
-      <Leyenda />
+      <ProyectoImagen imagen={p.imagen} eager />
+      <Leyenda texto="Pantalla de inicio de la web de Futbots." />
     </section>
 
     <!-- Lectura del proyecto -->
@@ -75,12 +74,14 @@ const pasos = [
         <Columna
           etiqueta="// contexto"
           titulo="¿De dónde nace?"
-          texto="Agregar qué motivó el proyecto, a quién se dirige y qué necesidad o pregunta lo puso en marcha."
+          texto="Futbots es un proyecto de autos robot que juegan al fútbol. La página acompaña esos partidos y permite seguir lo que pasa en cada uno."
+          estado=""
         />
         <Columna
           etiqueta="// objetivo"
           titulo="¿Qué buscaba resolver?"
-          texto="Definir el objetivo principal, el alcance y las condiciones de trabajo. Incluir solo información comprobable."
+          texto="Que los usuarios puedan loguearse para cargar los datos de cada partido, ver los goles y organizar torneos."
+          estado=""
         />
       </div>
 
@@ -114,7 +115,8 @@ const pasos = [
           id="solucion"
           etiqueta="// 03 / solución"
           titulo="Lo que se construyó."
-          texto="Incorporar la solución final y sus recursos reales. Explicar cómo responde al objetivo sin atribuir resultados no medidos."
+          texto="Una web full-stack: la interfaz en HTML, CSS y JavaScript, y un servidor en Node.js que guarda los datos de partidos y torneos en archivos JSON."
+          estado=""
         />
         <Columna
           id="aprendizajes"

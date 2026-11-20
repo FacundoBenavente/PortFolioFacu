@@ -1,22 +1,22 @@
 ---
-/** Proyecto personal 03 — Detalle (Figma frame 124:7005). */
+/** GuIA — Detalle (diseño: Figma frame 124:7005, "Proyecto personal 03"). */
 import Layout from '../../layouts/Layout.astro';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
 import Ruta from '../../components/proyecto/Ruta.astro';
 import Titulo from '../../components/proyecto/Titulo.astro';
 import Datos from '../../components/proyecto/Datos.astro';
-import RecursoBadge from '../../components/proyecto/RecursoBadge.astro';
 import Leyenda from '../../components/proyecto/Leyenda.astro';
 import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
 import Columna from '../../components/proyecto/Columna.astro';
 import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
-import Visual03 from '../../components/visuals/Visual03.astro';
+import ProyectoImagen from '../../components/ProyectoImagen.astro';
 import Footer from '../../components/Footer.astro';
 import { site } from '../../data/site';
 import { getProyecto } from '../../data/proyectos';
 
 const p = getProyecto('03');
 
+// Registro del proceso: todavía sin documentar
 const registros = [
   {
     n: '01',
@@ -39,7 +39,7 @@ const registros = [
 ];
 ---
 
-<Layout title={`${p.titulo} — ${site.nombre}`}>
+<Layout title={`${p.titulo} — ${site.nombre}`} description={p.resumen}>
   <DetalleNav />
   <main>
     <!-- Apertura del proyecto -->
@@ -48,13 +48,15 @@ const registros = [
       <div class="grid gap-10 lg:grid-cols-[580fr_660fr] lg:items-center lg:gap-14">
         <Titulo
           numero="03"
+          titulo={p.titulo}
           subtitulo={p.subtitulo}
+          estado={p.estado}
           size="lg"
           anotacion="// pensar en conexiones, no en piezas aisladas"
         />
         <div class="flex flex-col gap-4">
-          <Visual03 variant="hero" coordenada={p.coordenada}><RecursoBadge /></Visual03>
-          <Leyenda />
+          <ProyectoImagen imagen={p.imagen} eager />
+          <Leyenda texto="Pantalla de inicio de GuIA." />
         </div>
       </div>
       <Datos datos={p.datos} />
@@ -72,18 +74,20 @@ const registros = [
           Primero,<br />la pregunta.
         </h2>
         <p class="body-copy mt-4 text-sm">
-          El proyecto está producido. Los detalles de este caso están pendientes de documentar.
+          Proyecto desarrollado para un hackathon escolar. Ganó el premio a la ejecución.
         </p>
       </div>
       <Columna
         etiqueta="// contexto"
         titulo="Entender el escenario."
-        texto="Agregar la motivación, la situación inicial y las condiciones que dieron origen al proyecto."
+        texto="En un hackathon escolar, cada equipo de alumnos tiene que organizarse para sacar adelante su proyecto."
+        estado=""
       />
       <Columna
         etiqueta="// objetivo"
         titulo="Definir el desafío."
-        texto="Especificar qué se quería conseguir y qué quedó dentro o fuera del alcance."
+        texto="Que cada alumno elija su rol (TIMI, que es UX/UI, Front-End, Back-End o Hardware) y que el equipo se organice a través de tareas."
+        estado=""
       />
     </section>
 
@@ -129,18 +133,17 @@ const registros = [
     <!-- Solución del proyecto -->
     <section id="solucion" class="container-page scroll-mt-4 pt-[72px] pb-[72px]">
       <p class="note text-mint">03 / solución</p>
-      <div class="mt-6 grid gap-10 lg:grid-cols-[640fr_616fr]">
+      <div class="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-[640fr_616fr]">
         <div class="flex flex-col gap-7">
           <h2 class="font-display text-[clamp(40px,3.8vw,54px)] leading-[1.08] font-bold tracking-[-0.034em]">
             Hacer visible<br />lo que se resolvió.
           </h2>
           <p class="body-copy text-[17px]">
-            Incorporar la solución final, describir sus partes y relacionarlas con el objetivo. Este espacio
-            espera recursos y explicaciones del proyecto real.
+            GuIA permite que cada alumno elija su rol y organiza el trabajo del equipo en tareas. Me encargué
+            del back-end.
           </p>
-          <p class="note text-slate">[ Contenido por completar ]</p>
         </div>
-        <div class="rounded-xl border border-edge bg-panel p-6 md:p-8 lg:mt-3">
+        <div class="min-w-0 rounded-xl border border-edge bg-panel p-6 md:p-8 lg:mt-3">
           <div class="flex items-center justify-between border-b border-edge pb-[22px] font-mono text-[15px]">
             <span class="text-code-blue">pregunta</span>
             <span class="font-sans text-2xl text-slate" aria-hidden="true">→</span>
@@ -148,9 +151,9 @@ const registros = [
           </div>
           <pre
             class="overflow-x-auto pt-5 font-mono text-[clamp(14px,1.2vw,17px)] leading-[32px] text-mist">{`{
-  objetivo: [por completar],
-  decisiones: [por documentar],
-  resultado: [agregar recurso real]
+  objetivo: "organizar equipos por roles y tareas",
+  roles: ["TIMI", "Front-End", "Back-End", "Hardware"],
+  resultado: "premio a la ejecución"
 }`}</pre>
         </div>
       </div>

@@ -1,7 +1,10 @@
 ---
-/** Aclaración debajo de cada recurso visual del caso. */
+/** Pie de imagen "↳ …" debajo de los recursos visuales del caso. */
+interface Props {
+  texto: string;
+}
+
+const { texto } = Astro.props;
 ---
 
-<p class="font-mono text-[11px] leading-[1.5] text-slate">
-  ↳ Exploración visual abstracta. No representa una captura, entregable ni resultado del proyecto.
-</p>
+<p class="font-mono text-[11px] leading-[1.5] text-slate">↳ {texto}</p>

@@ -24,9 +24,9 @@ npm run preview    # sirve dist/ localmente
 |---|---|---|
 | `/` | Entrada — consola de bienvenida | `src/pages/index.astro` |
 | `/portfolio` | Portfolio principal | `src/pages/portfolio.astro` |
-| `/proyectos/proyecto-01` | Detalle del Proyecto 01 | `src/pages/proyectos/proyecto-01.astro` |
-| `/proyectos/proyecto-02` | Detalle del Proyecto 02 | `src/pages/proyectos/proyecto-02.astro` |
-| `/proyectos/proyecto-03` | Detalle del Proyecto 03 | `src/pages/proyectos/proyecto-03.astro` |
+| `/proyectos/proyecto-01` | **Futbots** — web full-stack para partidos de autos robot (2024) | `src/pages/proyectos/proyecto-01.astro` |
+| `/proyectos/proyecto-02` | **Sea of the Lost** — videojuego pirata en Unity, con música propia (2025) | `src/pages/proyectos/proyecto-02.astro` |
+| `/proyectos/proyecto-03` | **GuIA** — asistente de organización por roles y tareas, hackathon escolar (2026) | `src/pages/proyectos/proyecto-03.astro` |
 
 ---
 
@@ -65,9 +65,11 @@ Las tres páginas comparten la navegación (`DetalleNav`), la ruta (`Ruta`), la 
 
 | Proyecto | Secciones propias (en orden) |
 |---|---|
-| 01 | Cabecera con nota "// antes de empezar" y datos en fila · Visual01 grande · **Lectura**: punto de partida (3 columnas), proceso (3 tarjetas), solución + aprendizajes (2 columnas) |
-| 02 | Cabecera con nota "ESTUDIO PERSONAL" · galería: imagen 3D + datos en tarjeta + rombo · contexto + objetivo · proceso con diagrama de círculos y 3 pasos (fondo `surface`) · tarjeta mint de solución + aprendizajes |
-| 03 | Cabecera junto a Visual03 grande · datos en fila · planteamiento (3 columnas) · registro del proceso en tabla (fondo `surface`) · solución con bloque de código · aprendizajes con `/* */` |
+| 01 Futbots | Cabecera con nota "// antes de empezar" y datos en fila · captura grande de la web · **Lectura**: punto de partida (3 columnas), proceso (3 tarjetas), solución + aprendizajes (2 columnas) |
+| 02 Sea of the Lost | Cabecera con nota "VIDEOJUEGO / 02" · galería: menú del juego + datos en tarjeta + logo · contexto + objetivo · proceso con diagrama de círculos y 3 pasos (fondo `surface`) · tarjeta mint de solución + aprendizajes |
+| 03 GuIA | Cabecera junto a la captura de la app · datos en fila · planteamiento (3 columnas) · registro del proceso en tabla (fondo `surface`) · solución con bloque de código · aprendizajes con `/* */` |
+
+En Figma los proyectos se llaman "Proyecto personal 01/02/03" y llevaban ilustraciones conceptuales. En el sitio ya tienen nombre e imágenes reales: el título de la página muestra el nombre con un punto mint (como el logo "Facundo.").
 
 Anclas comunes en las páginas de proyecto: `#contexto`, `#proceso`, `#solucion`, `#aprendizajes`.
 
@@ -110,12 +112,12 @@ Si se vuelve a exportar desde Figma, conviene **destildar "Outline text"** en el
 ```
 PortFolioFacu/
 ├── PORTFOLIO.md / AGENTS.md
-├── Diseños/                    # exportaciones SVG + PDF de los frames de detalle
-├── public/images/              # SVG, PNG y JPG exportados de Figma (sección 7)
+├── Diseños/                    # exportaciones SVG + PDF de Figma y capturas originales de los proyectos
+├── public/images/              # imágenes que usa el sitio (sección 7)
 └── src/
     ├── data/
     │   ├── site.ts             # nombre, slug, email, roles
-    │   └── proyectos.ts        # los 3 proyectos: tarjeta, subtítulo, datos, href
+    │   └── proyectos.ts        # los 3 proyectos: título, textos, imagen, datos, href
     ├── layouts/Layout.astro    # <head>, título, descripción
     ├── styles/global.css       # Tailwind + tokens + utilidades
     ├── pages/
@@ -124,9 +126,10 @@ PortFolioFacu/
     │   └── proyectos/proyecto-01|02|03.astro
     └── components/
         ├── Logo, Nav, Footer, Pill
+        ├── ProyectoImagen.astro  # imagen de proyecto con borde redondeado (props: imagen, aspect?, eager?)
         ├── home/               # secciones del portfolio principal
         ├── proyecto/           # piezas de las páginas de detalle (tabla de abajo)
-        └── visuals/            # ilustraciones dibujadas en código
+        └── visuals/            # Emblema y GlitchName (portada), dibujados en código
 ```
 
 Componentes de `proyecto/`:
@@ -135,10 +138,9 @@ Componentes de `proyecto/`:
 |---|---|---|
 | `DetalleNav` | — | nav con "← Portfolio · Proyectos · Acerca de mí · Hablemos" |
 | `Ruta` | `numero` | "← Portfolio / Proyectos / 0X" + "ARCHIVO PERSONAL / 0X" |
-| `Titulo` | `numero, subtitulo, estado?, size? ('xl' 88px / 'lg' 74px), anotacion?` | `<proyecto_0X>` + pill + "Proyecto personal 0X" + bajada |
+| `Titulo` | `numero, titulo, subtitulo, estado, size? ('xl' 88px / 'lg' 74px), anotacion?` | `<proyecto_0X>` + pill (rol · año) + nombre del proyecto + bajada |
 | `Datos` | `datos, variant? ('fila' / 'tarjeta')` | rol, herramientas y contexto |
-| `RecursoBadge` | — | etiqueta "RECURSO VISUAL CONCEPTUAL" (dentro de una ilustración) |
-| `Leyenda` | — | "↳ Exploración visual abstracta…" |
+| `Leyenda` | `texto` | pie de imagen "↳ …" |
 | `IndiceLectura` | `numero` | barra "LEER PROYECTO_0X ↓ · 01. Contexto …" |
 | `Columna` | `etiqueta, titulo, texto, estado?, id?` | anotación + título de 34px + texto + "[ Contenido por completar ]" |
 | `OtrosProyectos` | `actual` | "Seguí explorando el archivo" con los otros dos proyectos |
@@ -181,19 +183,20 @@ Están en `@theme`, dentro de `src/styles/global.css`.
 
 ## 7. Imágenes y recursos
 
-Están en `public/images/`. Son exportaciones de Figma y no se deben redibujar.
+Están en `public/images/`. Los originales de las capturas están en `Diseños/`.
 
 | Archivo | Uso |
 |---|---|
-| `consola-indicadores.svg` | 3 puntos de la ventana de la consola (entrada) |
-| `emblema-*.svg` | campos, órbita y punto del emblema de la portada |
-| `tarjeta-01-*.svg` | indicadores, figura y órbita de Visual01 (tarjeta) |
-| `detalle-01-*.svg` | lo mismo en la versión grande (página del Proyecto 01) |
-| `proyecto-02.png` | render 3D de la tarjeta del Proyecto 02 |
-| `detalle-02.jpg` | render 3D grande de la página del Proyecto 02 (sacado del SVG exportado) |
-| `detalle-02-rombo.svg` | rombo ◇ de la página del Proyecto 02 (vector del SVG exportado) |
+| `consola-indicadores.svg` | 3 puntos de la ventana de la consola (entrada, exportado de Figma) |
+| `emblema-*.svg` | campos, órbita y punto del emblema de la portada (exportados de Figma) |
+| `futbots.png` (1366 × 641) | pantalla de inicio de Futbots: tarjeta y página 01 |
+| `sotl-menu.png` (1300 × 731) | menú principal de Sea of the Lost: tarjeta y página 02 |
+| `sotl-logo.png` (856 × 858) | logo de Sea of the Lost: página 02, junto a los datos |
+| `guia.png` (1366 × 644) | pantalla de inicio de GuIA: tarjeta y página 03 |
 
-Las ilustraciones son **recursos conceptuales, no capturas reales** (así lo aclaran las leyendas "↳ …"). Cuando haya imágenes reales, reemplazá la ilustración por un `<img>` y borrá la leyenda.
+La imagen principal de cada proyecto se define en `src/data/proyectos.ts` (`imagen: { src, alt, ancho, alto }`), y la usan la tarjeta y la página. En las tarjetas se recorta a 416 × 320 (`object-cover`, centrado); en las páginas se muestra entera.
+
+Las ilustraciones conceptuales del diseño original (interfaz con retícula, render 3D, núcleo de código) se reemplazaron por estas capturas y se borraron del proyecto. Siguen disponibles en Figma y en `Diseños/`.
 
 ---
 
@@ -203,8 +206,9 @@ Las ilustraciones son **recursos conceptuales, no capturas reales** (así lo acl
 Editá `src/data/site.ts`. El nombre se actualiza en el logo, la consola, el titular con glitch, el pie y el título de la pestaña. Con el email real, poné `emailEsEjemplo: false` para ocultar "Contacto de ejemplo" y "Reemplazar por tu correo…".
 
 ### 8.2 Completar datos de un proyecto
-- En `src/data/proyectos.ts`: `titulo`, `resumen` (tarjeta), `subtitulo` (página), `herramientas`, `estado` y `datos` (rol, herramientas y contexto, que se ven en la cabecera de la página).
-- Textos de lectura (contexto, objetivo, proceso, solución, aprendizajes): en `proyecto-0X.astro`, props de cada `<Columna>` y arrays `pasos` / `registros`. Cuando un texto ya es real, borrá su `estado` (`estado=""`) para quitar "[ Contenido por completar ]".
+- En `src/data/proyectos.ts`: `titulo`, `resumen` (tarjeta), `subtitulo` (página), `herramientas` (pill de la tarjeta), `estado` (rol · año), `imagen` y `datos` (rol, herramientas y contexto, que se ven en la cabecera de la página).
+- Textos de lectura (contexto, objetivo, proceso, solución, aprendizajes): en `proyecto-0X.astro`, props de cada `<Columna>` y arrays `pasos` / `registros`. Cuando un texto ya es real, poné `estado=""` para quitar "[ Contenido por completar ]".
+- **No inventes contenido:** lo que el autor no contó queda como "por completar". Los textos ya completados salen de lo que Facundo describió de cada proyecto (sección 12).
 
 ### 8.3 Cambiar textos de la página principal
 Cada sección está en `src/components/home/`. Las listas (intereses, cifras, capacidades, hitos de formación) son arrays al principio de cada archivo.
@@ -212,10 +216,10 @@ Cada sección está en `src/components/home/`. Las listas (intereses, cifras, ca
 ### 8.4 Agregar redes al contacto
 En `home/Contacto.astro`, debajo del email, agregá links `font-mono text-[13px] text-mist hover:text-mint`.
 
-### 8.5 Agregar imágenes reales a un proyecto
-1. Copiá la imagen a `public/images/`.
-2. Página: reemplazá la ilustración (`<Visual0X variant="hero">` o la imagen del P02) por `<img class="rounded-xl" …>` con su `alt`, y borrá `<Leyenda />` y `<RecursoBadge />`.
-3. Tarjeta en el portfolio: en `home/Proyectos.astro`, reemplazá `<Visual0X …>` por la imagen, y actualizá la leyenda "↳ Recursos visuales conceptuales…".
+### 8.5 Cambiar o sumar imágenes de un proyecto
+1. Copiá la imagen a `public/images/` (nombre en minúsculas, sin espacios).
+2. Imagen principal: cambiá `imagen` del proyecto en `src/data/proyectos.ts` (con `alt` descriptivo y su `ancho` y `alto` reales). Se actualizan la tarjeta y la página.
+3. Imágenes extra en una página (como el logo de Sea of the Lost): usá `<ProyectoImagen imagen={…} />` y, si hace falta, `<Leyenda texto="…" />`.
 
 ### 8.6 Agregar un cuarto proyecto
 1. Agregalo a `src/data/proyectos.ts` (ampliá el tipo `numero`).
@@ -239,9 +243,6 @@ Las ilustraciones (`visuals/` y el diagrama de círculos del Proyecto 02) están
 
 | Componente | Lienzo | Dónde |
 |---|---|---|
-| `Visual01` `variant="card"` / `"hero"` | 416 × 320 / 1296 × 600 | tarjeta / página del Proyecto 01 |
-| `Visual02` | 416 × 320 | tarjeta del Proyecto 02 (imagen) |
-| `Visual03` `variant="card"` / `"hero"` | 416 × 320 / 660 × 480 | tarjeta / página del Proyecto 03 |
 | `Emblema` | 468 × 484 | portada del portfolio |
 | `GlitchName` | en `em` del tamaño del texto (112px) | nombre de la portada |
 | Diagrama de círculos | 360 × 232 | proceso del Proyecto 02 (inline en la página) |
@@ -275,9 +276,18 @@ Verificación realizada (2026-11-19):
 
 ---
 
-## 12. Pendientes de contenido
+## 12. Información de los proyectos y pendientes
+
+Lo que Facundo contó de cada proyecto, que es la base de los textos ya completados:
+
+- **Futbots (2024):** autos robot que juegan al fútbol. La web permite que los usuarios se logueen para cargar datos de los partidos, mostrar los goles y armar torneos. Rol: full-stack. HTML, CSS, JS y Node.js; los datos se guardan en JSON.
+- **Sea of the Lost (2025):** juego de un barco pirata hecho en Unity. Rol: desarrollo en Unity y composición de la música.
+- **GuIA (2026):** proyecto para un hackathon escolar. Los alumnos eligen un rol (TIMI, que es UX/UI, Front-End, Back-End o Hardware) y se organizan con tareas. Ganó el premio a la ejecución. Rol: back-end.
+
+Pendientes:
 
 - [ ] Email real y perfiles (`site.ts`, receta 8.1).
-- [ ] Proyectos: nombres, descripciones, herramientas, rol, contexto y textos de lectura (receta 8.2).
+- [ ] Futbots: origen del proyecto, proceso (3 tarjetas) y aprendizajes.
+- [ ] Sea of the Lost: contexto, objetivo, proceso (3 pasos) y aprendizajes.
+- [ ] GuIA: herramientas usadas, registro del proceso (3 registros) y aprendizajes.
 - [ ] Formación: nombres de cursos, instituciones y período.
-- [ ] Imágenes reales de los proyectos en lugar de las ilustraciones conceptuales (receta 8.5).

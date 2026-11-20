@@ -1,21 +1,29 @@
 ---
-/** Proyecto personal 02 — Detalle (Figma frame 124:6876). */
+/** Sea of the Lost — Detalle (diseño: Figma frame 124:6876, "Proyecto personal 02"). */
 import Layout from '../../layouts/Layout.astro';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
 import Ruta from '../../components/proyecto/Ruta.astro';
 import Titulo from '../../components/proyecto/Titulo.astro';
 import Datos from '../../components/proyecto/Datos.astro';
-import RecursoBadge from '../../components/proyecto/RecursoBadge.astro';
 import Leyenda from '../../components/proyecto/Leyenda.astro';
 import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
 import Columna from '../../components/proyecto/Columna.astro';
 import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
+import ProyectoImagen from '../../components/ProyectoImagen.astro';
 import Footer from '../../components/Footer.astro';
 import { site } from '../../data/site';
 import { getProyecto } from '../../data/proyectos';
 
 const p = getProyecto('02');
 
+const logo = {
+  src: '/images/sotl-logo.png',
+  alt: 'Logo de Sea of the Lost: un pirata en un bote con una isla y un tiburón de fondo',
+  ancho: 856,
+  alto: 858,
+};
+
+// Proceso: todavía sin documentar
 const pasos = [
   {
     titulo: 'Entender el contexto',
@@ -33,46 +41,31 @@ const pasos = [
 ];
 ---
 
-<Layout title={`${p.titulo} — ${site.nombre}`}>
+<Layout title={`${p.titulo} — ${site.nombre}`} description={p.resumen}>
   <DetalleNav />
   <main>
     <!-- Apertura de galería -->
     <section class="container-page flex flex-col gap-10 pt-[34px]">
       <Ruta numero="02" />
       <div class="flex flex-col gap-10 lg:flex-row lg:items-end lg:gap-[100px]">
-        <Titulo numero="02" subtitulo={p.subtitulo} class="flex-1" />
+        <Titulo numero="02" titulo={p.titulo} subtitulo={p.subtitulo} estado={p.estado} class="flex-1" />
         <div class="flex flex-col gap-3.5 pb-2.5 lg:w-80 lg:shrink-0">
-          <p class="note text-mint">ESTUDIO PERSONAL / 02</p>
-          <p class="body-copy text-sm">
-            Una ficha para dar lugar al contexto, al proceso y a las decisiones de este proyecto producido.
-          </p>
+          <p class="note text-mint">VIDEOJUEGO / 02</p>
+          <p class="body-copy text-sm">Desarrollé el juego en Unity y compuse su música.</p>
         </div>
       </div>
 
       <div class="grid gap-10 lg:grid-cols-[840fr_416fr]">
         <div class="flex flex-col gap-4">
-          <div class="relative overflow-hidden rounded-xl bg-surface" style="aspect-ratio: 840 / 620">
-            <img
-              src="/images/detalle-02.jpg"
-              alt="Render 3D de un anillo translúcido verde que rodea un cubo metálico, sobre una superficie oscura"
-              class="absolute inset-0 size-full object-cover"
-            />
-            <RecursoBadge />
-            <p class="absolute top-[88%] left-[4%] font-mono text-[8.4px] whitespace-nowrap text-snow">
-              {p.coordenada}
-            </p>
-          </div>
-          <Leyenda />
+          <ProyectoImagen imagen={p.imagen} eager />
+          <Leyenda texto="Menú principal del juego." />
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col gap-10">
           <Datos datos={p.datos} variant="tarjeta" />
-          <div class="mt-10 flex flex-col items-start gap-[21px] px-6 lg:mt-[58px]">
-            <img src="/images/detalle-02-rombo.svg" alt="" width="42.3" height="42.3" class="ml-[2px]" />
-            <p class="body-copy text-sm">
-              La imagen acompaña el lenguaje visual del portfolio. La documentación real se agregará a
-              continuación.
-            </p>
-          </div>
+          <figure class="flex items-center gap-5 px-6">
+            <ProyectoImagen imagen={logo} class="w-28 shrink-0" />
+            <figcaption class="note text-slate">// logo del juego</figcaption>
+          </figure>
         </div>
       </div>
 
@@ -142,10 +135,9 @@ const pasos = [
           La solución,<br />con sus decisiones.
         </h2>
         <p class="mt-6 text-base leading-[1.65] text-mint-muted">
-          Incluir el trabajo final y explicar cómo responde al objetivo. Agregar imágenes propias y detallar lo
-          que se produjo, sin inventar métricas.
+          Un videojuego en Unity protagonizado por un barco pirata, con música compuesta especialmente para
+          el juego.
         </p>
-        <p class="mt-6 font-mono text-[11px] text-mint-muted">[ Contenido por completar ]</p>
       </div>
       <Columna
         id="aprendizajes"
