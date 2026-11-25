@@ -7,9 +7,15 @@
 interface Props {
   name: string;
   class?: string;
+  /** Si es true, la primera palabra queda arriba y el resto (apellido) abajo */
+  dosLineas?: boolean;
 }
 
-const { name, class: className } = Astro.props;
+const { name, class: className, dosLineas = false } = Astro.props;
+const [primera, ...resto] = name.split(' ');
+const lineas = dosLineas && resto.length ? [primera, resto.join(' ')] : [name];
+// Con leading-none cada línea mide 1em: el cursor va al final de la última
+const cursorTop = `${lineas.length - 1 + 0.79}em`;
 ---
 
 <h1
@@ -18,16 +24,17 @@ const { name, class: className } = Astro.props;
     className,
   ]}
 >
-  {name}
+  {lineas.map((l, i) => (i > 0 ? <><br />{l}</> : l))}
   <!-- Fragmento de señal: franja de 4px que muestra una copia rosa desplazada -->
   <span class="absolute top-[0.45em] left-[0.027em] h-[4px] w-full overflow-hidden" aria-hidden="true">
-    <span class="absolute top-[-0.45em] left-0 text-glitch">{name}</span>
+    <span class="absolute top-[-0.45em] left-0 text-glitch">{lineas.map((l, i) => (i > 0 ? <><br />{l}</> : l))}</span>
   </span>
   <span class="absolute top-[0.53em] left-[0.08em] h-[2px] w-[0.464em] bg-mint" aria-hidden="true"></span>
   <span class="absolute top-[0.75em] left-[2.84em] h-[3px] w-[0.41em] bg-night" aria-hidden="true"></span>
-  <!-- Cursor: 100px después del final del nombre -->
+  <!-- Cursor: 100px después del final del nombre (en la última línea) -->
   <span
-    class="absolute top-[0.79em] left-[calc(100%+0.89em)] h-[0.08em] w-[0.32em] bg-mint motion-safe:animate-blink"
+    style={`top: ${cursorTop}`}
+    class="absolute left-[calc(100%+0.89em)] h-[0.08em] w-[0.32em] bg-mint motion-safe:animate-blink"
     aria-hidden="true"
   ></span>
 </h1>
