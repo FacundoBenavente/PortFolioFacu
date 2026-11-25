@@ -66,7 +66,7 @@ Las tres páginas comparten la navegación (`DetalleNav`), la ruta (`Ruta`), la 
 | Proyecto | Secciones propias (en orden) |
 |---|---|
 | 01 Futbots | Cabecera con nota "// antes de empezar" y datos en fila · captura grande de la web · **Lectura**: punto de partida (3 columnas), proceso (3 tarjetas), solución + aprendizajes (2 columnas) |
-| 02 Sea of the Lost | Cabecera con nota "VIDEOJUEGO / 02" · galería: menú del juego + datos en tarjeta + logo · contexto + objetivo · proceso con diagrama de círculos y 3 pasos (fondo `surface`) · tarjeta mint de solución + aprendizajes |
+| 02 Sea of the Lost | Cabecera con nota "VIDEOJUEGO / 02" · galería: menú del juego + datos en tarjeta + logo · contexto + objetivo · tarjeta mint de solución (02) + aprendizajes (03). Sin sección de proceso: se sacó a pedido y el índice usa `omitir={['proceso']}` |
 | 03 GuIA | Cabecera junto a la captura de la app · datos en fila · planteamiento (3 columnas) · registro del proceso en tabla (fondo `surface`) · solución con bloque de código · aprendizajes con `/* */` |
 
 En Figma los proyectos se llaman "Proyecto personal 01/02/03" y llevaban ilustraciones conceptuales. En el sitio ya tienen nombre e imágenes reales: el título de la página muestra el nombre con un punto mint (como el logo "Facundo.").
@@ -141,7 +141,7 @@ Componentes de `proyecto/`:
 | `Titulo` | `numero, titulo, subtitulo, estado, size? ('xl' 88px / 'lg' 74px), anotacion?` | `<proyecto_0X>` + pill (rol · año) + nombre del proyecto + bajada |
 | `Datos` | `datos, variant? ('fila' / 'tarjeta')` | rol, herramientas y contexto |
 | `Leyenda` | `texto` | pie de imagen "↳ …" |
-| `IndiceLectura` | `numero` | barra "LEER PROYECTO_0X ↓ · 01. Contexto …" |
+| `IndiceLectura` | `numero`, `omitir?` (ids de sección) | barra "LEER PROYECTO_0X ↓ · 01. Contexto …"; renumera sola si se omiten secciones |
 | `Columna` | `etiqueta, titulo, texto, estado?, id?` | anotación + título de 34px + texto + "[ Contenido por completar ]" |
 | `OtrosProyectos` | `actual` | "Seguí explorando el archivo" con los otros dos proyectos |
 
@@ -244,8 +244,7 @@ Las ilustraciones (`visuals/` y el diagrama de círculos del Proyecto 02) están
 | Componente | Lienzo | Dónde |
 |---|---|---|
 | `Emblema` | 468 × 484 | portada del portfolio |
-| `GlitchName` | en `em` del tamaño del texto (112px) | nombre de la portada |
-| Diagrama de círculos | 360 × 232 | proceso del Proyecto 02 (inline en la página) |
+| `GlitchName` | en `em` del tamaño del texto (112px) | nombre de la portada; con `dosLineas` pone el apellido abajo |
 
 ---
 

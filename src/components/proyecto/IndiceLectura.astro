@@ -1,18 +1,26 @@
 ---
-/** Barra "LEER PROYECTO_0X ↓ · 01. Contexto · 02. Proceso · 03. Solución · 04. Aprendizajes". */
+/**
+ * Barra "LEER PROYECTO_0X ↓ · 01. Contexto · 02. Proceso · 03. Solución · 04. Aprendizajes".
+ * Con `omitir` se sacan secciones (por id) y la numeración se recalcula sola.
+ */
 interface Props {
   numero: string;
+  omitir?: string[];
   class?: string;
 }
 
-const { numero, class: className } = Astro.props;
+const { numero, omitir = [], class: className } = Astro.props;
 
-const partes = [
-  { label: '01. Contexto', href: '#contexto' },
-  { label: '02. Proceso', href: '#proceso' },
-  { label: '03. Solución', href: '#solucion' },
-  { label: '04. Aprendizajes', href: '#aprendizajes' },
+const todas = [
+  { nombre: 'Contexto', id: 'contexto' },
+  { nombre: 'Proceso', id: 'proceso' },
+  { nombre: 'Solución', id: 'solucion' },
+  { nombre: 'Aprendizajes', id: 'aprendizajes' },
 ];
+
+const partes = todas
+  .filter((s) => !omitir.includes(s.id))
+  .map((s, i) => ({ label: `${String(i + 1).padStart(2, '0')}. ${s.nombre}`, href: `#${s.id}` }));
 ---
 
 <nav

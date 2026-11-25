@@ -22,23 +22,6 @@ const logo = {
   ancho: 856,
   alto: 858,
 };
-
-// Proceso: todavía sin documentar
-const pasos = [
-  {
-    titulo: 'Entender el contexto',
-    texto:
-      'Agregar referencias, preguntas y observaciones que orientaron el inicio. Diferenciar hechos de suposiciones.',
-  },
-  {
-    titulo: 'Explorar alternativas',
-    texto: 'Mostrar propuestas e iteraciones reales. Explicar por qué algunas ideas se mantuvieron y otras no.',
-  },
-  {
-    titulo: 'Tomar decisiones',
-    texto: 'Relacionar los ajustes finales con el objetivo. Incorporar pruebas o devoluciones únicamente si existieron.',
-  },
-];
 ---
 
 <Layout title={`${p.titulo} — ${site.nombre}`} description={p.resumen}>
@@ -69,7 +52,7 @@ const pasos = [
         </div>
       </div>
 
-      <IndiceLectura numero="02" />
+      <IndiceLectura numero="02" omitir={['proceso']} />
     </section>
 
     <!-- Contexto y objetivo -->
@@ -86,51 +69,10 @@ const pasos = [
       />
     </section>
 
-    <!-- Proceso del proyecto -->
-    <section id="proceso" class="scroll-mt-4 bg-surface">
-      <div class="container-page grid gap-12 py-[72px] lg:grid-cols-[460px_1fr] lg:gap-[100px]">
-        <div class="flex flex-col">
-          <p class="note text-mint">02 / proceso</p>
-          <h2 class="mt-6 font-display text-[clamp(40px,3.8vw,54px)] leading-[1.08] font-bold tracking-[-0.034em]">
-            Mirar, probar,<br />ajustar.
-          </h2>
-          <p class="body-copy mt-7 text-[17px]">
-            Este espacio reúne los pasos reales del proyecto. El recorrido y sus evidencias están por
-            documentar.
-          </p>
-          <!-- Diagrama: dos círculos que se cruzan (lienzo 360 × 232) -->
-          <div class="canvas relative mt-[35px] w-full max-w-[360px]" style="--canvas: 360; aspect-ratio: 360 / 232" aria-hidden="true">
-            <div class="canvas-inner absolute inset-0">
-              <span class="absolute top-[1.5em] left-[20.5em] size-[214em] rounded-full border border-[#47665f]"></span>
-              <span class="absolute top-[1.5em] left-[140.5em] size-[214em] rounded-full border border-[#47665f]"></span>
-              <span class="absolute top-[98.7em] left-[172em] size-[18em] rotate-45 bg-mint"></span>
-              <p class="absolute top-[219em] left-[64em] font-mono whitespace-nowrap text-slate">
-                <span class="text-[10em]">exploración ↔ revisión</span>
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <ol>
-          {
-            pasos.map((paso, i) => (
-              <li class="grid grid-cols-[48px_1fr] gap-x-4 border-t border-edge py-[30px] sm:grid-cols-[60px_1fr] sm:gap-x-6">
-                <span class="font-mono text-[22px] text-mint">{String(i + 1).padStart(2, '0')}</span>
-                <div class="flex flex-col gap-3.5">
-                  <h3 class="font-display text-[clamp(22px,2vw,28px)] tracking-[-0.01em]">{paso.titulo}</h3>
-                  <p class="body-copy text-[15px]">{paso.texto}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
     <!-- Cierre del proyecto -->
-    <section class="container-page grid gap-12 py-[72px] lg:grid-cols-[740fr_508fr] lg:gap-12">
+    <section class="container-page grid gap-12 pb-[72px] lg:grid-cols-[740fr_508fr] lg:gap-12">
       <div id="solucion" class="flex scroll-mt-4 flex-col rounded-xl bg-mint p-8 text-mint-ink md:p-10">
-        <p class="note">03 / solución</p>
+        <p class="note">02 / solución</p>
         <h2 class="mt-5 font-display text-[clamp(36px,3.4vw,48px)] leading-[1.1] font-bold tracking-[-0.03em]">
           La solución,<br />con sus decisiones.
         </h2>
@@ -142,7 +84,7 @@ const pasos = [
       <Columna
         id="aprendizajes"
         class="lg:mt-9"
-        etiqueta="// 04 / aprendizajes"
+        etiqueta="// 03 / aprendizajes"
         titulo="Lo que cambia después."
         texto="Agregar qué aprendí, cuál fue el mayor desafío y qué exploraría en una siguiente iteración."
       />
