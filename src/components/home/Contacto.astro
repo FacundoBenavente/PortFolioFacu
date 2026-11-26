@@ -17,6 +17,7 @@ import { site } from '../../data/site';
 
       <div class="flex min-w-0 flex-1 flex-col items-start gap-[18px]">
         {site.emailEsEjemplo && <Pill tone="mint">Contacto de ejemplo</Pill>}
+        <p class="font-mono text-[11px] text-slate">CONTACTO DIRECTO</p>
         <a
           href={`mailto:${site.email}`}
           class="group flex w-full items-center justify-between gap-4 border-b border-mint pb-[18px] text-mint"
@@ -29,6 +30,7 @@ import { site } from '../../data/site';
             aria-hidden="true">↗</span
           >
         </a>
+        <p class="note text-mist">Conversemos sobre informática y nuevos proyectos.</p>
         {site.emailEsEjemplo && <p class="note text-slate">Reemplazar por tu correo y perfiles reales.</p>}
       </div>
     </div>

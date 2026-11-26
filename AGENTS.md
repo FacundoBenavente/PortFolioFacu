@@ -4,8 +4,8 @@ Antes de modificar este proyecto, leé **[PORTFOLIO.md](./PORTFOLIO.md)**. Ahí 
 
 Resumen mínimo:
 
-- Astro 5 + Tailwind CSS 4, 5 páginas: `/` (consola de entrada), `/portfolio`, `/proyectos/proyecto-01|02|03`.
-- Datos personales en `src/data/site.ts`; proyectos (Futbots, Sea of the Lost, GuIA: textos, imagen, datos) en `src/data/proyectos.ts`.
+- Astro 5 + Tailwind CSS 4, 6 páginas: `/` (consola de entrada), `/portfolio`, `/proyectos/proyecto-01|02|03|04`.
+- Datos personales en `src/data/site.ts`; proyectos (Futbots, Sea of the Lost, TCGCheck, GuIA: textos, imagen, datos) en `src/data/proyectos.ts`.
 - No inventes contenido de los proyectos: lo no documentado queda como "por completar" (ver PORTFOLIO.md, sección 12).
 - Las páginas de proyecto usan los componentes de `src/components/proyecto/` (Ruta, Titulo, Datos, IndiceLectura, Columna, OtrosProyectos…).
 - Usá los tokens de `src/styles/global.css` (`bg-surface`, `text-mist`, `text-mint`…), sin hex sueltos fuera de las ilustraciones.

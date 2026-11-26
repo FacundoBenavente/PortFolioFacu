@@ -16,22 +16,21 @@ import { getProyecto } from '../../data/proyectos';
 
 const p = getProyecto('01');
 
-// Proceso: todavía sin documentar
 const pasos = [
   {
     n: '01_',
     titulo: 'Exploración',
-    texto: 'Documentar el punto de partida y el material que ayudó a entender el desafío.',
+    texto: 'Aprendizaje de las herramientas y los lenguajes necesarios para el proyecto.',
   },
   {
     n: '02_',
     titulo: 'Decisiones',
-    texto: 'Mostrar alternativas y explicar qué criterios guiaron las decisiones del proyecto.',
+    texto: 'Se decidió cómo iba a ser el flujo del proyecto y cómo iba a estar organizado.',
   },
   {
     n: '03_',
     titulo: 'Desarrollo',
-    texto: 'Agregar iteraciones, pruebas y ajustes realizados, cuando corresponda.',
+    texto: 'Uso de herramientas, implementaciones y nuevas tecnologías para el proyecto.',
   },
 ];
 ---
@@ -93,7 +92,6 @@ const pasos = [
               De la pregunta a la decisión.
             </h2>
           </div>
-          <p class="note text-slate">Guion de proceso por completar</p>
         </div>
         <ol class="mt-8 grid gap-6 md:grid-cols-3">
           {
@@ -103,7 +101,6 @@ const pasos = [
                 <h3 class="font-display text-[26px] tracking-[-0.02em]">{paso.titulo}</h3>
                 <p class="body-copy text-[15px]">{paso.texto}</p>
                 <span class="h-0.5 w-10 bg-edge" aria-hidden="true" />
-                <span class="font-mono text-[10px] text-slate">POR DOCUMENTAR</span>
               </li>
             ))
           }
@@ -122,7 +119,8 @@ const pasos = [
           id="aprendizajes"
           etiqueta="// 04 / aprendizajes"
           titulo="Lo que me llevo."
-          texto="Compartir un aprendizaje concreto, una dificultad y qué haría distinto en una próxima versión."
+          texto="Aprendí a manejarme, con pocos conocimientos previos, para desarrollar una web full-stack."
+          estado=""
         />
       </div>
     </section>

@@ -1,0 +1,57 @@
+---
+/**
+ * Recurso visual conceptual de las tarjetas de proyecto sin captura
+ * (Figma: "Proyecto personal 03 — TCGCheck" › "Recurso visual conceptual", node 212:3).
+ * Núcleo de código con conexiones sobre líneas de escaneo. Coordenadas 1:1 con
+ * el frame de 306 × 235 de Figma; escala con el ancho del contenedor.
+ * Los colores son internos de la ilustración (regla 1 de PORTFOLIO.md).
+ */
+interface Props {
+  /** Línea de coordenada abajo a la izquierda, p. ej. "03 / lógica · conexión · posibilidad" */
+  coordenada: string;
+  /** Texto alternativo; sin él, la ilustración es decorativa */
+  label?: string;
+  class?: string;
+}
+
+const { coordenada, label, class: className } = Astro.props;
+
+const W = 306;
+const H = 235.385;
+const escaneo = Array.from({ length: 18 }, (_, i) => +(H - i * 13.846).toFixed(2));
+const nodos = [
+  [261.2, 161.2],
+  [252, 59.9],
+  [37.8, 142.3],
+];
+const conexiones = [
+  [223.4, 160.1, 36.7, 0.74],
+  [250.9, 58.8, 12.2, 0.74],
+  [263.2, 58.8, 0.74, 35.3],
+  [223.4, 94.2, 39.8, 0.74],
+  [36.7, 141.2, 45.9, 0.74],
+];
+---
+
+<svg
+  viewBox={`0 0 ${W} ${H}`}
+  preserveAspectRatio="xMidYMid slice"
+  class:list={['block size-full', className]}
+  {...label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' }}
+>
+  <rect width={W} height={H} fill="#171F35" />
+  {escaneo.map((y) => <rect x="0" y={y} width={W} height="0.74" fill="#25304B" />)}
+  {conexiones.map(([x, y, w, h]) => <rect x={x} y={y} width={w} height={h} fill="#6D8AAC" />)}
+  {
+    nodos.map(([cx, cy]) => (
+      <rect x={cx - 1.84} y={cy - 1.84} width="3.68" height="3.68" fill="#8CF0CB" stroke="#101A2C" stroke-width="2.2" />
+    ))
+  }
+  <rect x="83" y="47.4" width="140" height="140.5" rx="5.5" fill="#11182A" stroke="#4E6180" stroke-width="0.74" />
+  <text x="95" y="93" font-family="IBM Plex Mono, monospace" font-size="28" fill="#81D7F7">{'{ }'}</text>
+  <text font-family="IBM Plex Mono, monospace" font-size="8.1" fill="#BAA3F6">
+    <tspan x="95" y="133">idea → lógica</tspan>
+    <tspan x="95" y="147">lógica → posibilidad</tspan>
+  </text>
+  <text x="12.2" y="213" font-family="IBM Plex Mono, monospace" font-size="5.9" fill="#A7B2C2">{coordenada}</text>
+</svg>

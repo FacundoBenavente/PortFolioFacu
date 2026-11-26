@@ -6,11 +6,12 @@
 import Layout from '../layouts/Layout.astro';
 import Logo from '../components/Logo.astro';
 import { site } from '../data/site';
+import { proyectos } from '../data/proyectos';
 
 const arranque = [
   { etiqueta: 'Cargando identidad', valor: site.nombre },
-  { etiqueta: 'Montando archivo', valor: '4 proyectos personales' },
-  { etiqueta: 'Inicializando curiosidad', valor: 'Videojuegos · Informática · Back-end' },
+  { etiqueta: 'Montando archivo', valor: `${proyectos.length} proyectos personales` },
+  { etiqueta: 'Inicializando curiosidad', valor: site.roles.join(' · ') },
 ];
 ---
 
@@ -83,7 +84,7 @@ const arranque = [
       </div>
 
       <div class="note flex w-full max-w-[1104px] flex-wrap justify-between gap-x-6 gap-y-1">
-        <p class="text-slate">Un espacio para pensar, diseñar y construir.</p>
+        <p class="text-slate">Un espacio para pensar, programar y construir.</p>
         <p class="text-mint">sistema listo ●</p>
       </div>
     </main>
@@ -91,7 +92,7 @@ const arranque = [
     <!-- Pie de acceso -->
     <footer class="note flex h-[74px] shrink-0 items-center justify-between gap-4 border-t border-edge text-slate">
       <p>&lt;portfolio estado="por explorar" /&gt;</p>
-      <p>00 / 04</p>
+      <p>00 / portfolio</p>
     </footer>
   </div>
 </Layout>

@@ -5,12 +5,12 @@ import Emblema from '../visuals/Emblema.astro';
 import { site } from '../../data/site';
 
 const navLinks = [
-  { label: '02. Proyectos', href: '#proyectos' },
   { label: '01. Acerca de mí', href: '#acerca' },
-  { label: '04. Formación', href: '#formacion' },
+  { label: '02. Proyectos', href: '#proyectos' },
+  { label: '03. Formación', href: '#formacion' },
 ];
 
-const intereses = ['Videojuegos', 'Informática', 'Back-end'];
+const intereses = site.roles;
 ---
 
 <header>
@@ -31,8 +31,8 @@ const intereses = ['Videojuegos', 'Informática', 'Back-end'];
         </p>
       </div>
       <p class="body-copy text-lg md:text-xl">
-Informática y desarrollo Back-end. Me interesa entender cómo funcionan los 
-sistemas y transformar ideas en soluciones con código.
+        Informática y desarrollo Back-end. Me interesa entender cómo funcionan los sistemas y transformar
+        ideas en soluciones con código.
       </p>
       <div class="flex flex-wrap gap-4 pt-2">
         <a
@@ -60,7 +60,7 @@ sistemas y transformar ideas en soluciones con código.
     <div
       class="container-page flex flex-wrap items-center gap-x-8 gap-y-3 py-[26px] font-mono whitespace-nowrap lg:justify-between"
     >
-      <p class="note w-full text-slate lg:w-auto">INTERESES EN COMÚN</p>
+      <p class="note w-full text-slate lg:w-auto">MIS INTERESES</p>
       {intereses.map((i) => <p class="text-[13px] text-mist">{i}</p>)}
       <a href="#acerca" class="hidden text-base text-mint lg:block" aria-label="Ir a Acerca de mí">↓</a>
     </div>

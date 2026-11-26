@@ -1,9 +1,11 @@
 ---
-/** Navegación entre proyectos al final de cada caso (Figma node 124:6853). */
+/** Navegación entre proyectos al final de cada caso: los otros tres (Figma node 212:122). */
 import { proyectos } from '../../data/proyectos';
 
+import type { Proyecto } from '../../data/proyectos';
+
 interface Props {
-  actual: string;
+  actual: Proyecto['numero'];
 }
 
 const { actual } = Astro.props;
@@ -14,9 +16,9 @@ const otros = proyectos.filter((p) => p.numero !== actual);
   <div class="container-page flex flex-col gap-7 py-16">
     <div class="note flex flex-wrap justify-between gap-x-6 gap-y-1">
       <p class="text-mint">&lt;/proyecto_{actual}&gt;</p>
-      <p class="text-mist">Seguí explorando el archivo</p>
+      <p class="text-mist">Seguí explorando el portfolio</p>
     </div>
-    <ul class="grid gap-6 md:grid-cols-2">
+    <ul class="grid gap-6 md:grid-cols-3">
       {
         otros.map((p) => {
           const Tag = p.href ? 'a' : 'div';
@@ -25,19 +27,19 @@ const otros = proyectos.filter((p) => p.numero !== actual);
               <Tag
                 href={p.href}
                 class:list={[
-                  'group flex items-center gap-6 rounded-xl border border-edge p-6',
+                  'group flex items-center gap-4 rounded-xl border border-edge p-5',
                   p.href && 'transition-colors hover:border-mint',
                 ]}
               >
-                <span class="flex size-[76px] shrink-0 items-center justify-center rounded-md bg-mint-deep font-mono text-[28px] text-mint">
+                <span class="flex size-[52px] shrink-0 items-center justify-center rounded-md bg-mint-deep font-mono text-[22px] text-mint">
                   {p.numero}
                 </span>
-                <span class="flex min-w-0 flex-1 flex-col gap-2.5">
-                  <span class="font-mono text-[10px] text-slate">EXPLORAR PROYECTO</span>
-                  <span class="font-display text-[clamp(20px,1.8vw,26px)] tracking-[-0.031em]">{p.titulo}</span>
+                <span class="flex min-w-0 flex-1 flex-col gap-2">
+                  <span class="font-mono text-[9px] text-slate">EXPLORAR PROYECTO</span>
+                  <span class="truncate font-display text-[clamp(20px,1.6vw,23px)] tracking-[-0.031em]">{p.titulo}</span>
                 </span>
                 <span
-                  class="text-[30px] text-mint transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+                  class="text-[26px] text-mint transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
                   aria-hidden="true"
                 >
                   ↗

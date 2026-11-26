@@ -3,7 +3,7 @@ export type Dato = { etiqueta: string; valor: string; detalle: string };
 export type Imagen = { src: string; alt: string; ancho: number; alto: number };
 
 export type Proyecto = {
-  numero: '01' | '02' | '03';
+  numero: '01' | '02' | '03' | '04';
   titulo: string;
   /** Texto corto de la tarjeta en la página principal */
   resumen: string;
@@ -13,8 +13,11 @@ export type Proyecto = {
   herramientas: string;
   /** Rol y año: línea gris de la tarjeta y pill de la página */
   estado: string;
-  /** Imagen principal: tarjeta y cabecera de la página */
-  imagen: Imagen;
+  /**
+   * Imagen principal: tarjeta y cabecera de la página.
+   * Sin imagen, la tarjeta muestra el recurso conceptual dibujado en código (`visuals/NucleoCodigo`).
+   */
+  imagen?: Imagen;
   /** Rol, herramientas y contexto (cabecera de la página de detalle) */
   datos: Dato[];
   /** Ruta de la página de detalle. Sin href, la tarjeta se muestra sin enlace. */
@@ -47,7 +50,7 @@ export const proyectos: Proyecto[] = [
     titulo: 'Sea of the Lost',
     resumen: 'Videojuego de un barco pirata hecho en Unity, con música original.',
     subtitulo: 'Un juego de piratas en alta mar, hecho en Unity y con música propia.',
-    herramientas: 'Unity · Composición musical',
+    herramientas: 'Unity · Bandlab',
     estado: 'Desarrollo y música · 2025',
     imagen: {
       src: '/images/sotl-menu.png',
@@ -64,10 +67,26 @@ export const proyectos: Proyecto[] = [
   },
   {
     numero: '03',
+    titulo: 'TCGCheck',
+    // Resumen y bajada: textos provisorios del diseño hasta documentar el proyecto
+    resumen: 'Un espacio para compartir la lógica del sistema y lo aprendido.',
+    subtitulo: 'Un espacio para presentar el proyecto, sus decisiones y lo aprendido.',
+    herramientas: 'Node.js · Supabase DB · Python · TCGdex',
+    estado: 'Back-end e IA · 2026',
+    // Sin capturas todavía: la tarjeta usa el recurso conceptual
+    datos: [
+      { etiqueta: 'ROL EN EL PROYECTO', valor: 'Back-end e IA', detalle: 'Desarrollo del back-end y entrenamiento de las IAs.' },
+      { etiqueta: 'HERRAMIENTAS', valor: 'Node.js, Supabase DB, Python, TCGdex API', detalle: 'PyTorch y TensorFlow para las IAs.' },
+      { etiqueta: 'CONTEXTO Y FECHA', valor: '2026', detalle: 'Proyecto escolar.' },
+    ],
+    href: '/proyectos/proyecto-03',
+  },
+  {
+    numero: '04',
     titulo: 'GuIA',
     resumen: 'Asistente para que equipos de alumnos se organicen por roles y tareas. Premio a la ejecución.',
-    subtitulo: 'Un asistente para que cada equipo se organice por roles y tareas.',
-    herramientas: 'Herramientas: por completar',
+    subtitulo: 'Un asistente para que cada equipo se organice por roles y tareas en un proyecto.',
+    herramientas: 'Supabase DB · Node.js',
     estado: 'Back-end · Hackathon 2026',
     imagen: {
       src: '/images/guia.png',
@@ -77,10 +96,10 @@ export const proyectos: Proyecto[] = [
     },
     datos: [
       { etiqueta: 'ROL EN EL PROYECTO', valor: 'Back-end', detalle: 'Desarrollo del back-end de la aplicación.' },
-      { etiqueta: 'HERRAMIENTAS', valor: 'Por completar', detalle: 'Agregar las herramientas utilizadas.' },
-      { etiqueta: 'CONTEXTO Y FECHA', valor: 'Hackathon escolar · 2026', detalle: 'Ganó el premio a la ejecución.' },
+      { etiqueta: 'HERRAMIENTAS', valor: 'Node.js y Supabase DB', detalle: 'Sentencias en SP y hosteo en Supabase.' },
+      { etiqueta: 'CONTEXTO Y FECHA', valor: 'Hackathon escolar · 2026', detalle: 'Ganamos el premio a la ejecución.' },
     ],
-    href: '/proyectos/proyecto-03',
+    href: '/proyectos/proyecto-04',
   },
 ];
 

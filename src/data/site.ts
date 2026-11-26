@@ -7,5 +7,5 @@ export const site = {
   /** Email de ejemplo del diseño: reemplazar por el real */
   email: 'facundobenavente2008@gmail.com',
   emailEsEjemplo: false,
-  roles: ['Videojuegos · Informática · Back-end'],
+  roles: ['Videojuegos', 'Informática', 'Back-end'],
 };
