@@ -89,6 +89,12 @@ export const proyectos: Proyecto[] = [
     subtitulo: 'Un espacio para presentar el proyecto, sus decisiones y lo aprendido.',
     herramientas: 'Node.js · Supabase DB · Python · TCGdex',
     estado: 'Back-end y IA · 2026',
+    imagen: {
+      src: '/images/tcgcheck.png',
+      alt: 'Landing de TCGCheck: el titular "Cada carta cuenta. Haz que cuente." junto a un celular con la app, la colección y una carta verificada',
+      ancho: 840,
+      alto: 463,
+    },
     logo: {
       src: '/images/tcgcheck-logo.png',
       alt: 'Logo de TCGCheck: una carta dentro de un marco de escaneo sobre fondo azul',

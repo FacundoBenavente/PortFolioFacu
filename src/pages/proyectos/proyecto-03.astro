@@ -1,8 +1,7 @@
 ---
 /**
  * TCGCheck — Detalle (diseño: Figma frame 212:44, "Proyecto personal 03").
- * Misma estructura que Sea of the Lost (02). Todavía no hay capturas de la app:
- * la galería usa el recurso conceptual.
+ * Misma estructura que Sea of the Lost (02), con la captura de la landing en la galería.
  */
 import Layout from '../../layouts/Layout.astro';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
@@ -13,7 +12,7 @@ import Leyenda from '../../components/proyecto/Leyenda.astro';
 import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
 import Columna from '../../components/proyecto/Columna.astro';
 import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
-import FichaConceptual from '../../components/visuals/FichaConceptual.astro';
+import ProyectoImagen from '../../components/ProyectoImagen.astro';
 import Footer from '../../components/Footer.astro';
 import { site } from '../../data/site';
 import { getProyecto } from '../../data/proyectos';
@@ -37,16 +36,8 @@ const p = getProyecto('03');
 
       <div class="grid gap-10 lg:grid-cols-[840fr_416fr]">
         <div class="flex flex-col gap-4">
-          <FichaConceptual
-            comentario="// proyecto_03 · TCGCheck"
-            flujo="idea → desarrollo → aprendizaje"
-            bajada="Una nueva historia para documentar."
-            codigo={`{
-  proyecto: "TCGCheck",
-  ficha: "lista para completar"
-}`}
-          />
-          <Leyenda texto="Referencia conceptual; la captura real del proyecto se incorporará aquí." />
+          <ProyectoImagen imagen={p.imagen!} eager />
+          <Leyenda texto="Landing de TCGCheck." />
         </div>
         <div class="flex flex-col gap-7">
           <Datos datos={p.datos} variant="tarjeta" />

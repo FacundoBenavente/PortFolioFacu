@@ -69,7 +69,7 @@ Las cuatro páginas comparten la navegación (`DetalleNav`), la ruta (`Ruta`), l
 |---|---|
 | 01 Futbot | Cabecera con nota "// antes de empezar" y datos en fila · captura grande de la web · **Lectura**: punto de partida (3 columnas), proceso (3 tarjetas), solución + aprendizajes (2 columnas) |
 | 02 Sea of the Lost | Cabecera con nota "VIDEOJUEGO / 02" · galería: menú del juego + datos en tarjeta + logo · contexto + objetivo · tarjeta mint de solución (02) + aprendizajes (03). Sin sección de proceso: se sacó a pedido y el índice usa `omitir={['proceso']}` |
-| 03 TCGCheck | Igual que 02, pero sin capturas de la app: la galería usa `visuals/FichaConceptual` y el lugar del logo lo ocupa una nota con `{ }`. Contexto, objetivo, solución y aprendizajes ya son reales |
+| 03 TCGCheck | Igual que 02: captura de la landing en la galería; el lugar del logo lo ocupa una nota con `{ }`. Contexto, objetivo, solución y aprendizajes ya son reales |
 | 04 GuIA | Cabecera junto a la captura de la app · datos en fila · planteamiento (3 columnas, con la pregunta del hackathon) · registro del proceso en tabla: PREGUNTA + ACCIONES (fondo `surface`) · solución con bloque de código · aprendizajes con `/* */` |
 
 En Figma los proyectos se llaman "Proyecto personal 01/02/03/04" y llevaban ilustraciones conceptuales. En el sitio usan nombre e imágenes reales (TCGCheck, sin capturas todavía, usa el recurso conceptual): el título de la página muestra el nombre con un punto mint (como el logo "Facundo.").
@@ -132,7 +132,7 @@ PortFolioFacu/
         ├── ProyectoImagen.astro  # imagen de proyecto con borde redondeado (props: imagen, aspect?, eager?)
         ├── home/               # secciones del portfolio principal
         ├── proyecto/           # piezas de las páginas de detalle (tabla de abajo)
-        └── visuals/            # Emblema y GlitchName (portada); NucleoCodigo y FichaConceptual (proyectos sin captura)
+        └── visuals/            # Emblema y GlitchName (portada); NucleoCodigo (tarjeta de un proyecto sin logo ni imagen)
 ```
 
 Componentes de `proyecto/`:
@@ -196,6 +196,7 @@ Están en `public/images/`. Los originales de las capturas están en `Diseños/`
 | `futbot-logo.png` (130 × 107) | logo de Futbot: tarjeta 01. Es chico y en la tarjeta se agranda a ~306px: con una versión más grande se vería más nítido |
 | `sotl-menu.png` (1300 × 731) | menú principal de Sea of the Lost: página 02 |
 | `sotl-logo.png` (856 × 858) | logo de Sea of the Lost: tarjeta 02 (con esquinas redondeadas) y página 02, junto a los datos |
+| `tcgcheck.png` (840 × 463) | captura de la landing de TCGCheck: página 03 |
 | `tcgcheck-logo.png` (612 × 613) | logo de TCGCheck: tarjeta 03 (extraído del SVG de Figma y achicado; el original de 306px está en `Diseños/`) |
 | `guia.png` (1366 × 644) | pantalla de inicio de GuIA: página 04 |
 | `guia-logo.png` (612 × 549) | logo de GuIA sobre fondo negro: tarjeta 04 (extraído del SVG de Figma y achicado) |
@@ -252,7 +253,6 @@ Las ilustraciones (`visuals/` y el diagrama de círculos del Proyecto 02) están
 | `Emblema` | 468 × 484 | portada del portfolio |
 | `GlitchName` | en `em` del tamaño del texto (112px) | nombre de la portada; con `dosLineas` pone el apellido abajo |
 | `NucleoCodigo` | SVG 306 × 235 (`viewBox`) | tarjeta de un proyecto sin `logo` ni `imagen` (hoy no se usa) |
-| `FichaConceptual` | HTML; 840 × 472 desde `md:` | galería de la página de TCGCheck |
 
 ---
 
@@ -295,5 +295,5 @@ Lo que Facundo contó de cada proyecto, que es la base de los textos ya completa
 Pendientes:
 
 - [ ] Email real y perfiles (`site.ts`, receta 8.1).
-- [ ] TCGCheck: capturas de la app (para la galería del detalle) y bajada real (hoy es el texto provisorio del diseño).
+- [ ] TCGCheck: bajada real y nota `{ }` junto a los datos (hoy son textos provisorios del diseño).
 - [ ] Formación: nombres de cursos, instituciones y período.
