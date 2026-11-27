@@ -31,7 +31,24 @@ import { proyectos } from '../../data/proyectos';
                 href={p.href}
                 class:list={['group flex flex-col gap-[22px]', p.href && 'cursor-pointer']}
               >
-                {p.imagen ? (
+                {p.logo ? (
+                  // Como en Figma: el logo ocupa todo el ancho, alineado arriba, en un espacio
+                  // de 306 × 307 (así los textos de las 4 tarjetas quedan a la misma altura)
+                  <div class="aspect-[306/307]">
+                    <img
+                      src={p.logo.src}
+                      alt={p.logo.alt}
+                      width={p.logo.ancho}
+                      height={p.logo.alto}
+                      loading="lazy"
+                      decoding="async"
+                      class:list={[
+                        'h-auto w-full transition-transform duration-300 motion-safe:group-hover:-translate-y-1',
+                        p.logo.redondeado && 'rounded-[12.75%]',
+                      ]}
+                    />
+                  </div>
+                ) : p.imagen ? (
                   <ProyectoImagen
                     imagen={p.imagen}
                     aspect="306 / 235"
@@ -60,7 +77,6 @@ import { proyectos } from '../../data/proyectos';
                   >
                     {p.titulo}
                   </h3>
-                  <p class="body-copy text-sm">{p.resumen}</p>
                   <Pill>{p.herramientas}</Pill>
                   <p class="font-mono text-[11px] text-slate">{p.estado}</p>
                 </div>

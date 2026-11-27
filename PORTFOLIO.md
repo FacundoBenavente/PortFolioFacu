@@ -24,9 +24,9 @@ npm run preview    # sirve dist/ localmente
 |---|---|---|
 | `/` | Entrada — consola de bienvenida | `src/pages/index.astro` |
 | `/portfolio` | Portfolio principal | `src/pages/portfolio.astro` |
-| `/proyectos/proyecto-01` | **Futbots** — web full-stack para partidos de autos robot (2024) | `src/pages/proyectos/proyecto-01.astro` |
+| `/proyectos/proyecto-01` | **Futbot** — web full-stack para partidos de autos robot (2024) | `src/pages/proyectos/proyecto-01.astro` |
 | `/proyectos/proyecto-02` | **Sea of the Lost** — videojuego pirata en Unity, con música propia (2025) | `src/pages/proyectos/proyecto-02.astro` |
-| `/proyectos/proyecto-03` | **TCGCheck** — back-end e IA, proyecto escolar (2026). Todavía sin capturas ni documentación | `src/pages/proyectos/proyecto-03.astro` |
+| `/proyectos/proyecto-03` | **TCGCheck** — app que escanea cartas para autenticarlas y valorizarlas con 3 IAs; back-end e IA, proyecto escolar (2026) | `src/pages/proyectos/proyecto-03.astro` |
 | `/proyectos/proyecto-04` | **GuIA** — asistente de organización por roles y tareas, hackathon escolar (2026) | `src/pages/proyectos/proyecto-04.astro` |
 
 ---
@@ -43,10 +43,10 @@ npm run preview    # sirve dist/ localmente
 | Frame | Node | Tamaño | Fuente usada |
 |---|---|---|---|
 | Entrada — Consola de bienvenida | `124:6385` | 1440 × 1000 | MCP de Figma |
-| Portfolio principal — Facundo | `124:6436` | 1440 × 3822 | MCP + exportación |
+| Portfolio principal — Facundo | `124:6436` | 1440 × 3641 | exportación (2026-11-26, segunda versión) |
 | Proyecto personal 01 — Detalle | `124:6702` | 1440 × 2937 | MCP + exportación (sección "Lectura") |
 | Proyecto personal 02 — Detalle | `124:6876` | 1440 × 3113 | exportación |
-| Proyecto personal 03 — Detalle (TCGCheck) | `212:44` | 1440 × 2210 | exportación |
+| Proyecto personal 03 — Detalle (TCGCheck) | `212:44` | 1440 × 2236 | exportación (2026-11-26, segunda versión) |
 | Proyecto personal 04 — Detalle (GuIA) | `124:7005` | 1440 × 3113 | exportación |
 
 ### Secciones del portfolio principal
@@ -67,9 +67,9 @@ Las cuatro páginas comparten la navegación (`DetalleNav`), la ruta (`Ruta`), l
 
 | Proyecto | Secciones propias (en orden) |
 |---|---|
-| 01 Futbots | Cabecera con nota "// antes de empezar" y datos en fila · captura grande de la web · **Lectura**: punto de partida (3 columnas), proceso (3 tarjetas), solución + aprendizajes (2 columnas) |
+| 01 Futbot | Cabecera con nota "// antes de empezar" y datos en fila · captura grande de la web · **Lectura**: punto de partida (3 columnas), proceso (3 tarjetas), solución + aprendizajes (2 columnas) |
 | 02 Sea of the Lost | Cabecera con nota "VIDEOJUEGO / 02" · galería: menú del juego + datos en tarjeta + logo · contexto + objetivo · tarjeta mint de solución (02) + aprendizajes (03). Sin sección de proceso: se sacó a pedido y el índice usa `omitir={['proceso']}` |
-| 03 TCGCheck | Igual que 02, pero sin capturas: la galería usa `visuals/FichaConceptual` y el lugar del logo lo ocupa una nota con `{ }`. Contexto, objetivo, solución y aprendizajes son textos provisorios del diseño ("Espacio para…") y quedan marcados "por completar" |
+| 03 TCGCheck | Igual que 02, pero sin capturas de la app: la galería usa `visuals/FichaConceptual` y el lugar del logo lo ocupa una nota con `{ }`. Contexto, objetivo, solución y aprendizajes ya son reales |
 | 04 GuIA | Cabecera junto a la captura de la app · datos en fila · planteamiento (3 columnas, con la pregunta del hackathon) · registro del proceso en tabla: PREGUNTA + ACCIONES (fondo `surface`) · solución con bloque de código · aprendizajes con `/* */` |
 
 En Figma los proyectos se llaman "Proyecto personal 01/02/03/04" y llevaban ilustraciones conceptuales. En el sitio usan nombre e imágenes reales (TCGCheck, sin capturas todavía, usa el recurso conceptual): el título de la página muestra el nombre con un punto mint (como el logo "Facundo.").
@@ -192,12 +192,15 @@ Están en `public/images/`. Los originales de las capturas están en `Diseños/`
 |---|---|
 | `consola-indicadores.svg` | 3 puntos de la ventana de la consola (entrada, exportado de Figma) |
 | `emblema-*.svg` | campos, órbita y punto del emblema de la portada (exportados de Figma) |
-| `futbots.png` (1366 × 641) | pantalla de inicio de Futbots: tarjeta y página 01 |
-| `sotl-menu.png` (1300 × 731) | menú principal de Sea of the Lost: tarjeta y página 02 |
-| `sotl-logo.png` (856 × 858) | logo de Sea of the Lost: página 02, junto a los datos |
-| `guia.png` (1366 × 644) | pantalla de inicio de GuIA: tarjeta y página 04 |
+| `futbots.png` (1366 × 641) | pantalla de inicio de Futbot: página 01 |
+| `futbot-logo.png` (130 × 107) | logo de Futbot: tarjeta 01. Es chico y en la tarjeta se agranda a ~306px: con una versión más grande se vería más nítido |
+| `sotl-menu.png` (1300 × 731) | menú principal de Sea of the Lost: página 02 |
+| `sotl-logo.png` (856 × 858) | logo de Sea of the Lost: tarjeta 02 (con esquinas redondeadas) y página 02, junto a los datos |
+| `tcgcheck-logo.png` (612 × 613) | logo de TCGCheck: tarjeta 03 (extraído del SVG de Figma y achicado; el original de 306px está en `Diseños/`) |
+| `guia.png` (1366 × 644) | pantalla de inicio de GuIA: página 04 |
+| `guia-logo.png` (612 × 549) | logo de GuIA sobre fondo negro: tarjeta 04 (extraído del SVG de Figma y achicado) |
 
-La imagen principal de cada proyecto se define en `src/data/proyectos.ts` (`imagen: { src, alt, ancho, alto }`), y la usan la tarjeta y la página. En las tarjetas se recorta a 306 × 235 (`object-cover`, centrado); en las páginas se muestra entera. Si un proyecto no tiene `imagen`, la tarjeta muestra `visuals/NucleoCodigo` (el recurso conceptual del diseño).
+La imagen principal de cada proyecto se define en `src/data/proyectos.ts` (`imagen: { src, alt, ancho, alto }`), y se muestra entera en la página. La tarjeta de la principal muestra, en este orden de prioridad: el `logo` (como en Figma: todo el ancho de la tarjeta, alineado arriba, dentro de un espacio de 306 × 307 para que los textos de las 4 tarjetas queden alineados; `redondeado: true` le pone las esquinas de Figma), la `imagen` recortada (`object-cover`) o, si no hay ninguna, `visuals/NucleoCodigo` (el recurso conceptual del diseño). Las tarjetas no muestran el `resumen`: solo número, nombre, herramientas y rol · año.
 
 Las ilustraciones conceptuales del diseño original (interfaz con retícula, render 3D, núcleo de código) se reemplazaron por estas capturas y se borraron del proyecto. Siguen disponibles en Figma y en `Diseños/`.
 
@@ -209,7 +212,7 @@ Las ilustraciones conceptuales del diseño original (interfaz con retícula, ren
 Editá `src/data/site.ts`. El nombre se actualiza en el logo, la consola, el titular con glitch, el pie y el título de la pestaña. Con el email real, poné `emailEsEjemplo: false` para ocultar "Contacto de ejemplo" y "Reemplazar por tu correo…".
 
 ### 8.2 Completar datos de un proyecto
-- En `src/data/proyectos.ts`: `titulo`, `resumen` (tarjeta), `subtitulo` (página), `herramientas` (pill de la tarjeta), `estado` (rol · año), `imagen` y `datos` (rol, herramientas y contexto, que se ven en la cabecera de la página).
+- En `src/data/proyectos.ts`: `titulo`, `resumen` (descripción meta de la página), `subtitulo` (página), `herramientas` (pill de la tarjeta), `estado` (rol · año), `imagen`, `logo` (tarjeta) y `datos` (rol, herramientas y contexto, que se ven en la cabecera de la página).
 - Textos de lectura (contexto, objetivo, proceso, solución, aprendizajes): en `proyecto-0X.astro`, props de cada `<Columna>` y arrays `pasos` / `registros`. Cuando un texto ya es real, poné `estado=""` para quitar "[ Contenido por completar ]".
 - **No inventes contenido:** lo que el autor no contó queda como "por completar". Los textos ya completados salen de lo que Facundo describió de cada proyecto (sección 12).
 
@@ -248,7 +251,7 @@ Las ilustraciones (`visuals/` y el diagrama de círculos del Proyecto 02) están
 |---|---|---|
 | `Emblema` | 468 × 484 | portada del portfolio |
 | `GlitchName` | en `em` del tamaño del texto (112px) | nombre de la portada; con `dosLineas` pone el apellido abajo |
-| `NucleoCodigo` | SVG 306 × 235 (`viewBox`) | tarjeta de un proyecto sin `imagen` (TCGCheck) |
+| `NucleoCodigo` | SVG 306 × 235 (`viewBox`) | tarjeta de un proyecto sin `logo` ni `imagen` (hoy no se usa) |
 | `FichaConceptual` | HTML; 840 × 472 desde `md:` | galería de la página de TCGCheck |
 
 ---
@@ -284,14 +287,13 @@ Verificación realizada (2026-11-19):
 
 Lo que Facundo contó de cada proyecto, que es la base de los textos ya completados:
 
-- **Futbots (2024):** autos robot que juegan al fútbol. La web permite que los usuarios se logueen para cargar datos de los partidos, mostrar los goles y armar torneos. Rol: full-stack. HTML, CSS, JS y Node.js; los datos se guardan en JSON. Proceso (exploración, decisiones, desarrollo) y aprendizaje cargados desde Figma (2026-11-26).
+- **Futbot (2024):** autos robot que juegan al fútbol. La web permite que los usuarios se logueen para cargar datos de los partidos, mostrar los goles y armar torneos. Rol: full-stack. HTML, CSS, JS y Node.js; los datos se guardan en JSON. Proceso (exploración, decisiones, desarrollo) y aprendizaje cargados desde Figma (2026-11-26).
 - **Sea of the Lost (2025):** juego de un barco pirata hecho en Unity. Rol: desarrollo en Unity y composición de la música (Bandlab). Equipo de 4: 2 en Unity y 2 en arte 3D; alcance académico. Contexto, objetivo, solución y aprendizajes cargados desde Figma.
-- **TCGCheck (2026):** proyecto escolar. Rol: back-end e IA (desarrollo del back-end y entrenamiento de las IAs). Node.js, Supabase DB, Python, TCGdex API; PyTorch y TensorFlow.
+- **TCGCheck (2026):** proyecto escolar. Rol: back-end e IA (desarrollo del back-end y entrenamiento de las IAs). Node.js, Supabase DB, Python, TCGdex API; PyTorch y TensorFlow. App que escanea cartas para autenticarlas y valorizarlas, pensada para usuarios casuales del TCG y también veteranos. Usa 3 IAs: descarte de falsificaciones evidentes, identificación y autenticación 1 a 1 contra una referencia de TCGdex. Los datasets se armaron a mano.
 - **GuIA (2026):** proyecto para un hackathon escolar de 2 días (3 desarrolladores y 3 diseñadoras). Los alumnos eligen un rol (TIMI, que es UX/UI, Front-End, Back-End o Hardware) y se organizan con tareas. Ganó el premio a la ejecución. Rol: back-end, con Node.js y Supabase (sentencias en SP y hosteo). Planteamiento, registro del proceso y aprendizaje cargados desde Figma.
 
 Pendientes:
 
 - [ ] Email real y perfiles (`site.ts`, receta 8.1).
-- [ ] TCGCheck: capturas (imagen principal → `imagen` en `proyectos.ts`), resumen, bajada, contexto, objetivo, solución y aprendizajes.
-- [ ] Confirmar el nombre del proyecto 01: Figma dice "Futbot" y el sitio "Futbots".
+- [ ] TCGCheck: capturas de la app (para la galería del detalle) y bajada real (hoy es el texto provisorio del diseño).
 - [ ] Formación: nombres de cursos, instituciones y período.

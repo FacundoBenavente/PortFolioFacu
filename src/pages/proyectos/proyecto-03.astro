@@ -1,8 +1,8 @@
 ---
 /**
  * TCGCheck — Detalle (diseño: Figma frame 212:44, "Proyecto personal 03").
- * Misma estructura que Sea of the Lost (02). Todavía no hay capturas: la galería
- * usa el recurso conceptual y los textos sin documentar quedan "por completar".
+ * Misma estructura que Sea of the Lost (02). Todavía no hay capturas de la app:
+ * la galería usa el recurso conceptual.
  */
 import Layout from '../../layouts/Layout.astro';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
@@ -67,12 +67,14 @@ const p = getProyecto('03');
       <Columna
         etiqueta="// 01 / contexto"
         titulo="El punto de partida."
-        texto="Espacio para contar de dónde nació TCGCheck, qué necesidad aborda y en qué contexto se desarrolló."
+        texto="Nació como una idea de proyecto escolar. Consiste en una app que escanea tus cartas para poder autenticarlas y valorizarlas."
+        estado=""
       />
       <Columna
         etiqueta="// objetivo"
         titulo="Una intención clara."
-        texto="Espacio para definir el objetivo, las personas a las que se dirige y el alcance del proyecto."
+        texto="Se dirige principalmente a usuarios casuales del TCG, aunque también busca ayudar a los más veteranos."
+        estado=""
       />
     </section>
 
@@ -84,8 +86,8 @@ const p = getProyecto('03');
           El proyecto,<br />con sus decisiones.
         </h2>
         <p class="mt-6 text-base leading-[1.65] text-mint-muted">
-          Espacio para presentar lo construido, explicar las decisiones principales y sumar evidencias del
-          funcionamiento.
+          La app usa 3 IAs para la autenticación: una simple, encargada de descartar las falsificaciones más
+          evidentes; una de identificación, y una de autenticación 1 a 1 con una referencia de la TCGdex API.
         </p>
       </div>
       <Columna
@@ -93,7 +95,8 @@ const p = getProyecto('03');
         class="lg:mt-9"
         etiqueta="// 03 / aprendizajes"
         titulo="Lo que cambia después."
-        texto="Espacio para compartir aprendizajes, dificultades y próximos pasos a partir de esta experiencia."
+        texto="Aprendí mucho sobre el desarrollo de IA. Tuve que armar datasets a mano por la falta de datasets prearmados, y aprender a reconocer cuándo y en qué falla la IA."
+        estado=""
       />
     </section>
 

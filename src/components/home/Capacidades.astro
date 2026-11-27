@@ -11,10 +11,10 @@ const areas = [
 ---
 
 <section>
-  <div class="container-page flex flex-col gap-12 py-16 lg:flex-row lg:gap-20 lg:py-20">
+  <div class="container-page flex flex-col gap-12 py-16 lg:flex-row lg:gap-10 lg:py-20">
     <div class="flex flex-col gap-7 lg:w-[480px] lg:shrink-0">
       <p class="note text-mint">03 / capacidades</p>
-      <h2 class="font-display text-[clamp(34px,3.4vw,48px)] leading-[1.08] font-bold tracking-[-0.031em]">
+      <h2 class="font-display text-[clamp(32px,2.8vw,40px)] leading-[1.08] font-bold tracking-[-0.031em]">
         <span class="whitespace-nowrap">Lógica que conecta.</span><br /><span class="whitespace-nowrap">Código que resuelve.</span>
       </h2>
       <p class="body-copy text-[17px]">
@@ -29,7 +29,17 @@ const areas = [
           areas.map((a) => (
             <li class="flex flex-col gap-2 border-t border-edge py-[22px] sm:flex-row sm:items-center sm:gap-6">
               <span class="w-[62px] shrink-0 font-mono text-[26px] text-mint" aria-hidden="true">
-                {a.simbolo}
+                {
+                  a.simbolo === '◇' ? (
+                    // IBM Plex Mono no tiene "◇" y la fuente de reemplazo lo dibuja chico:
+                    // se usa el trazo de Figma (28 × 27)
+                    <svg viewBox="0 0 28 27" width="28" height="27" fill="currentColor" class="block">
+                      <path d="M14.43 26.67L1.33 13.59L14.43 0.48L27.51 13.59L14.43 26.67ZM14.43 24.3L25.14 13.59L14.43 2.85L3.72 13.59L14.43 24.3Z" />
+                    </svg>
+                  ) : (
+                    a.simbolo
+                  )
+                }
               </span>
               <h3 class="shrink-0 font-display text-[25px] font-medium tracking-[-0.032em] sm:w-[220px]">
                 {a.nombre}
