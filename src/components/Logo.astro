@@ -1,11 +1,12 @@
 ---
 import { site } from '../data/site';
+import { url } from '../lib/url';
 
 interface Props {
   href?: string;
 }
 
-const { href = '/portfolio' } = Astro.props;
+const { href = url('/portfolio') } = Astro.props;
 ---
 
 <a href={href} class="flex items-center gap-2.5 whitespace-nowrap">

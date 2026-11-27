@@ -8,6 +8,7 @@ Resumen mínimo:
 - Datos personales en `src/data/site.ts`; proyectos (Futbot, Sea of the Lost, TCGCheck, GuIA: textos, imagen, datos) en `src/data/proyectos.ts`.
 - No inventes contenido de los proyectos: lo no documentado queda como "por completar" (ver PORTFOLIO.md, sección 12).
 - Las páginas de proyecto usan los componentes de `src/components/proyecto/` (Ruta, Titulo, Datos, IndiceLectura, Columna, OtrosProyectos…).
+- Links e imágenes internas con `url()` de `src/lib/url.ts` (respetan la base del sitio; se publica en Vercel).
 - Usá los tokens de `src/styles/global.css` (`bg-surface`, `text-mist`, `text-mint`…), sin hex sueltos fuera de las ilustraciones.
 - Verificá con `npm run build` y revisando a 1440px y a 375px.
 - No actualices Astro a v7 sin actualizar Node (requiere ≥ 22.23.4). Astro 5 no tiene `astro dev --background`.

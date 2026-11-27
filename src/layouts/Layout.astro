@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { url } from '../lib/url';
 import { site } from '../data/site';
 
 interface Props {
@@ -11,6 +12,9 @@ const {
   title = `${site.nombre} — Portfolio personal`,
   description = `Portfolio personal de ${site.nombre}: ${site.roles.join(', ')}.`,
 } = Astro.props;
+
+// Con `site` configurado (SITE_URL en el deploy) se agrega la URL canónica
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 ---
 
 <!doctype html>
@@ -20,8 +24,17 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <meta name="theme-color" content="#0c1018" />
+    <meta name="color-scheme" content="dark" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content={`${site.nombre} — Portfolio personal`} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="icon" href={url('/favicon.ico')} sizes="32x32" />
     <title>{title}</title>
   </head>
   <body id="top">

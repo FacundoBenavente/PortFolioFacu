@@ -1,12 +1,13 @@
 ---
 /** Navegación de las páginas de proyecto (Figma node 124:6703). */
 import Nav from '../Nav.astro';
+import { url } from '../../lib/url';
 
 const links = [
-  { label: '← Portfolio', href: '/portfolio' },
-  { label: 'Proyectos', href: '/portfolio#proyectos' },
-  { label: 'Acerca de mí', href: '/portfolio#acerca' },
+  { label: '← Portfolio', href: url('/portfolio') },
+  { label: 'Proyectos', href: url('/portfolio#proyectos') },
+  { label: 'Acerca de mí', href: url('/portfolio#acerca') },
 ];
 ---
 
-<Nav links={links} contactHref="/portfolio#contacto" />
+<Nav links={links} contactHref={url('/portfolio#contacto')} />

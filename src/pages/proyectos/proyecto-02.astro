@@ -1,6 +1,7 @@
 ---
 /** Sea of the Lost — Detalle (diseño: Figma frame 124:6876, "Proyecto personal 02"). */
 import Layout from '../../layouts/Layout.astro';
+import { url } from '../../lib/url';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
 import Ruta from '../../components/proyecto/Ruta.astro';
 import Titulo from '../../components/proyecto/Titulo.astro';
@@ -17,7 +18,7 @@ import { getProyecto } from '../../data/proyectos';
 const p = getProyecto('02');
 
 const logo = {
-  src: '/images/sotl-logo.png',
+  src: url('/images/sotl-logo.png'),
   alt: 'Logo de Sea of the Lost: un pirata en un bote con una isla y un tiburón de fondo',
   ancho: 856,
   alto: 858,
@@ -95,5 +96,5 @@ const logo = {
 
     <OtrosProyectos actual="02" />
   </main>
-  <Footer label="← Volver al índice de proyectos" href="/portfolio#proyectos" />
+  <Footer label="← Volver al índice de proyectos" href={url('/portfolio#proyectos')} />
 </Layout>

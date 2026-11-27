@@ -1,4 +1,5 @@
 ---
+import { url } from '../../lib/url';
 /**
  * "Emblema de curiosidad" de la portada (468 × 484, node 124:6469):
  * campos orbitales, ejes, el símbolo </> rotado y una nota.
@@ -28,7 +29,7 @@ const { class: className } = Astro.props;
       <span class="font-mono text-[12em] text-mist">pensar → crear → iterar</span>
     </div>
 
-    <img src="/images/emblema-punto-orbital.svg" alt="" class="absolute top-[82em] left-[360em] size-[12em]" />
+    <img src={url('/images/emblema-punto-orbital.svg')} alt="" class="absolute top-[82em] left-[360em] size-[12em]" />
 
     <!-- Símbolo de autor: caja 310 × 220 rotada -8° -->
     <div class="absolute top-[101.36em] left-[98.8em] h-[220em] w-[310em] -rotate-8 overflow-hidden">
@@ -38,13 +39,13 @@ const { class: className } = Astro.props;
     </div>
 
     <img
-      src="/images/emblema-orbita-conexion.svg"
+      src={url('/images/emblema-orbita-conexion.svg')}
       alt=""
       class="absolute top-[64em] left-[15em] h-[344em] w-[436em] max-w-none"
     />
     <span class="absolute top-0 left-[235em] h-[468em] w-px bg-edge"></span>
     <span class="absolute top-[235em] left-0 h-px w-[468em] bg-edge"></span>
-    <img src="/images/emblema-campo-interior.svg" alt="" class="absolute top-[72em] left-[72em] size-[326em] max-w-none" />
-    <img src="/images/emblema-campo-orbital.svg" alt="" class="absolute top-[25em] left-[25em] size-[420em] max-w-none" />
+    <img src={url('/images/emblema-campo-interior.svg')} alt="" class="absolute top-[72em] left-[72em] size-[326em] max-w-none" />
+    <img src={url('/images/emblema-campo-orbital.svg')} alt="" class="absolute top-[25em] left-[25em] size-[420em] max-w-none" />
   </div>
 </div>

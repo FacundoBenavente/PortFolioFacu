@@ -107,6 +107,7 @@ Si se vuelve a exportar desde Figma, conviene **destildar "Outline text"** en el
 11. **Accesibilidad:** las ilustraciones llevan `role="img"` y `aria-label`, o `aria-hidden` si son decorativas. Hay un solo `<h1>` por página. Las animaciones van con `motion-safe:`.
 12. **No agregues dependencias ni JavaScript de cliente sin necesidad.**
 13. **Astro está fijado en la versión 5** (sección 11).
+14. **Links e imágenes internas siempre con `url()`** (`src/lib/url.ts`): `href={url('/portfolio')}`, `src: url('/images/x.png')`. En Vercel la base es `/`, pero así el sitio también funciona si algún día se publica en una subcarpeta (por ejemplo, GitHub Pages bajo `/PortFolioFacu/`, sección 11). Los anclas de la misma página (`#proyectos`) no lo necesitan.
 
 ---
 
@@ -121,6 +122,7 @@ PortFolioFacu/
     ├── data/
     │   ├── site.ts             # nombre, slug, email, roles
     │   └── proyectos.ts        # los 4 proyectos: título, textos, imagen (opcional), datos, href
+    ├── lib/url.ts              # url(): rutas internas con la base del sitio (regla 14)
     ├── layouts/Layout.astro    # <head>, título, descripción
     ├── styles/global.css       # Tailwind + tokens + utilidades
     ├── pages/
@@ -274,6 +276,10 @@ Verificación realizada (2026-11-19):
 ---
 
 ## 11. Notas técnicas
+
+- **Deploy:** Vercel, importando el repo de GitHub, sin configuración extra (Astro se detecta solo; base `/`). La URL canónica sale de `VERCEL_PROJECT_PRODUCTION_URL` o de `SITE_URL` (ver `astro.config.mjs`). Para publicar en una subcarpeta se usa `BASE_PATH`; para probarlo en local desde Git Bash: `MSYS_NO_PATHCONV=1 BASE_PATH=/PortFolioFacu npm run build` (sin `MSYS_NO_PATHCONV`, Git Bash convierte la ruta en `C:/Program Files/Git/...`).
+- **Sin página 404 propia:** no está en Figma, así que por ahora Vercel muestra la suya. Para sumarla, crear `src/pages/404.astro`.
+- **Favicon:** `public/favicon.svg` y `favicon.ico` son el `</` mint del logo sobre `night`; reemplazaron al de Astro.
 
 - **Node y Astro:** Astro 7 exige Node ≥ 22.23.4 y la máquina original tiene 22.17, por eso Astro está en 5.18. Para actualizar, subí Node y después corré `npm install astro@latest`.
 - **Astro 5 no tiene `astro dev --background`.** Si el 4321 está ocupado (por ejemplo, con el portfolio de Gonzalo), `npm run dev` usa el 4322.

@@ -4,11 +4,11 @@
  * Misma estructura que Sea of the Lost (02), con la captura de la landing en la galería.
  */
 import Layout from '../../layouts/Layout.astro';
+import { url } from '../../lib/url';
 import DetalleNav from '../../components/proyecto/DetalleNav.astro';
 import Ruta from '../../components/proyecto/Ruta.astro';
 import Titulo from '../../components/proyecto/Titulo.astro';
 import Datos from '../../components/proyecto/Datos.astro';
-import Leyenda from '../../components/proyecto/Leyenda.astro';
 import IndiceLectura from '../../components/proyecto/IndiceLectura.astro';
 import Columna from '../../components/proyecto/Columna.astro';
 import OtrosProyectos from '../../components/proyecto/OtrosProyectos.astro';
@@ -37,7 +37,6 @@ const p = getProyecto('03');
       <div class="grid gap-10 lg:grid-cols-[840fr_416fr]">
         <div class="flex flex-col gap-4">
           <ProyectoImagen imagen={p.imagen!} eager />
-          <Leyenda texto="Landing de TCGCheck." />
         </div>
         <div class="flex flex-col gap-7">
           <Datos datos={p.datos} variant="tarjeta" />
@@ -93,5 +92,5 @@ const p = getProyecto('03');
 
     <OtrosProyectos actual="03" />
   </main>
-  <Footer label="← Volver al índice de proyectos" href="/portfolio#proyectos" />
+  <Footer label="← Volver al índice de proyectos" href={url('/portfolio#proyectos')} />
 </Layout>

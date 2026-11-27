@@ -4,6 +4,7 @@
  * Pantalla de bienvenida tipo terminal; "y" o Enter llevan al portfolio.
  */
 import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/url';
 import Logo from '../components/Logo.astro';
 import { site } from '../data/site';
 import { proyectos } from '../data/proyectos';
@@ -19,7 +20,7 @@ const arranque = [
   <div class="container-page flex min-h-svh flex-col">
     <!-- Cabecera de acceso -->
     <header class="flex h-[100px] shrink-0 items-center justify-between gap-6">
-      <Logo href="/" />
+      <Logo href={url('/')} />
       <p class="note hidden text-slate sm:block">PORTFOLIO PERSONAL / INICIO</p>
     </header>
 
@@ -33,7 +34,7 @@ const arranque = [
       <!-- Consola -->
       <div class="w-full max-w-[1104px] overflow-hidden rounded-xl border border-edge bg-surface shadow-float">
         <div class="flex h-[52px] items-center justify-between gap-4 bg-raised px-6">
-          <img src="/images/consola-indicadores.svg" alt="" width="43" height="9" />
+          <img src={url('/images/consola-indicadores.svg')} alt="" width="43" height="9" />
           <p class="truncate font-mono text-xs text-mist">{site.slug}@portfolio: ~ / bienvenida</p>
           <p class="hidden font-mono text-[11px] text-slate sm:block">UTF-8</p>
         </div>
@@ -70,7 +71,7 @@ const arranque = [
               ¿Continuar al portfolio? <span class="text-slate">[y/n]</span>
             </p>
             <a
-              href="/portfolio"
+              href={url('/portfolio')}
               id="entrar"
               class="group flex w-fit items-center gap-3.5 rounded-md text-mint focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mint"
             >
